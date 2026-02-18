@@ -3,6 +3,7 @@ import { salvarOPFirebase, buscarOPFirebase, escutarOPFirebase, adicionarEventoF
 from "./database.js";
 
 let opAtual = null;
+window.irPara = function(){};
 
 // SALVAR OP (PCP)
 window.salvarOP = async function() {
