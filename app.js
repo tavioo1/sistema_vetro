@@ -3,8 +3,29 @@ import { salvarOPFirebase, buscarOPFirebase, escutarOPFirebase, adicionarEventoF
 from "./database.js";
 
 let opAtual = null;
-window.irPara = function(){};
+window.irPara = function(nomeTela){
+  const telas = [
+          "telaMenu",
+          "telaProducao",
+          "telaPCP",
+          "telaAlmox",
+          "telaComercial",
+          "telaMarketing",
+          "telaDPRH",
+          "telaExpedicao",
+  ];
+  telas.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = "none";
+  });
 
+  const telaAtiva = document.getElementById("tela" + capitalize(nomeTela));
+  if(telaAtiva) telaAtiva.style.display ="block";
+};
+
+function capitalize(str){
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 // SALVAR OP (PCP)
 window.salvarOP = async function() {
 
