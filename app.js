@@ -3,29 +3,26 @@ import { salvarOPFirebase, buscarOPFirebase, escutarOPFirebase, adicionarEventoF
 from "./database.js";
 
 let opAtual = null;
-window.irPara = function(nomeTela){
-  const telas = [
-          "telaMenu",
-          "telaProducao",
-          "telaPCP",
-          "telaAlmox",
-          "telaComercial",
-          "telaMarketing",
-          "telaDPRH",
-          "telaExpedicao",
-  ];
-  telas.forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.style.display = "none";
+window.irPara = function(nomeTela) {
+
+  // Esconde todas as telas
+  document.querySelectorAll("[id^='tela']").forEach(el => {
+    el.style.display = "none";
   });
 
-  const telaAtiva = document.getElementById("tela" + capitalize(nomeTela));
-  if(telaAtiva) telaAtiva.style.display ="block";
+  // Monta automaticamente o ID da tela
+  const primeiraMaiuscula = nomeTela.charAt(0).toUpperCase() + nomeTela.slice(1);
+  const idTela = "tela" + primeiraMaiuscula;
+
+  const tela = document.getElementById(idTela);
+
+  if (tela) {
+    tela.style.display = "block";
+  } else {
+    console.warn("Tela não encontrada:", idTela);
+  }
 };
 
-function capitalize(str){
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 // SALVAR OP (PCP)
 window.salvarOP = async function() {
 
