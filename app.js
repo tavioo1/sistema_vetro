@@ -22,6 +22,11 @@ window.irPara = function(nomeTela) {
     console.warn("Tela não encontrada:", idTela);
   }
 };
+window.prodAbrir = function() {};
+window.prodVoltarHub = function() {};
+window.voltarMenu = function() {};
+window.pcpAbrirBloco = function() {};
+window.pcpFecharBlocos = function() {};
 
 // SALVAR OP (PCP)
 window.salvarOP = async function() {
