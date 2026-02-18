@@ -24,3 +24,20 @@ export function escutarOP(chave, callback) {
     callback(snapshot.val());
   });
 }
+export function salvarOPFirebase(chave, dados) {
+  return set(ref(db, "ops/" + chave + "/cabecalho"), dados);
+}
+
+export function buscarOPFirebase(chave) {
+  return get(ref(db, "ops/" + chave));
+}
+
+export function escutarOPFirebase(chave, callback) {
+  return onValue(ref(db, "ops/" + chave), (snapshot) => {
+    callback(snapshot.val());
+  });
+}
+
+export function adicionarEventoFirebase(chave, evento) {
+  return push(ref(db, "ops/" + chave + "/eventos"), evento);
+}
