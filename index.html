@@ -1,0 +1,4379 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- @COPYRIGHT CODE BY TAVIOO -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>VETRO - Soluções Inteligentes em Tubos e Conexões</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 16px;
+        background: #f6f7f9;
+      }.card {
+        background: white;
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }.row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }label {
+        font-size: 12px;
+        color: #444;
+        display: block;
+        margin-bottom: 4px;
+      }input,select, button,textarea {
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #cfd6dd;
+        width: 100%;
+        box-sizing: border-box;
+      }button {
+        cursor: pointer;
+        border: none;
+        background: #1f6feb;
+        color: white;
+        font-weight: 600;
+      }button.secondary {
+        background: #2f3b46;
+      }button.danger {
+        background: #c62828;
+      }button.ghost {
+        background: #eef3ff;
+        color: #1f4fd6;
+        border: 1px solid #cfd6dd;
+      }.col {
+        flex: 1;
+        min-width: 180px;
+      }.pill {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: #eef3ff;
+        color: #1f4fd6;
+        font-size: 12px;
+        margin-right: 6px;
+        margin-top: 6px;
+      }table {
+        width: 100%;
+        border-collapse: collapse;
+      }th,td {
+        padding: 10px;
+        border-bottom: 1px solid #e8edf2;
+        text-align: left;
+        font-size: 14px;
+        vertical-align: top;
+      }th {
+        font-size: 12px;
+        color: #555;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }.muted {
+        color: #666;
+        font-size: 12px;
+      }.warn {
+        color: #ff0000;
+        font-weight: 700;
+      }.ok {
+        color: #1b7f2a;
+        font-weight: 700;
+      }.grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        gap: 12px;
+      }@media (max-width: 900px) {.grid3 {
+          grid-template-columns: 1fr;
+        }
+      }.hint {
+        font-size: 12px;
+        color: #4b5563;
+        margin-top: 6px;
+      }.mini {
+        font-size: 12px;
+        color: #374151;
+      }.tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }.tabbtn {
+        background: #e9eef6;
+        color: #233;
+        border: 1px solid #cfd6dd;
+        padding: 10px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+      }.tabbtn.active {
+        background: #1f6feb;
+        color: #fff;
+        border-color: #1f6feb;
+      }.subcard {
+        background: #fbfcfe;
+        border: 1px solid #e6edf5;
+        border-radius: 12px;
+        padding: 12px;
+      }      .divider {
+        border: none;
+        border-top: 1px solid #e8edf2;
+        margin: 14px 0;
+      }      .right {
+        text-align: right;
+      }      .badge {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 10px;
+        background: #f1f5f9;
+        color: #111827;
+        font-size: 12px;
+        border: 1px solid #e5e7eb;
+      }      .pillYellow {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #fff7d6;
+        color: #8a5a00;
+        font-size: 12px;
+        border: 1px solid #ffe7a3;
+        font-weight: 700;
+      }      .pcpHomeButtons {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        gap: 12px;
+      }      .pcpBigBtn {
+        padding: 18px;
+        font-size: 16px;
+        border-radius: 14px;
+      }      @media (max-width: 700px) {        .pcpHomeButtons {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- TELA 0: MENU -->
+    <div class="card" id="telaMenu">
+      <h2 style="margin: 0 0 8px 0">Sistema de Gestão Industrial - VETRO</h2>
+      <div class="muted">
+        Selecione a sua respectiva área para acessar o módulo.
+      </div>
+
+      <div class="grid3" style="margin-top: 12px">
+        <button onclick="irPara('producao')">PRODUÇÃO</button>
+        <button onclick="irPara('pcp')">PCP</button>
+        <button class="secondary" onclick="irPara('almox')">Carregando..</button>
+        <button class="secondary" onclick="irPara('comercial')">Carregando..</button>
+        <button class="secondary" onclick="irPara('marketing')">Carregando..</button>
+        <button class="secondary" onclick="irPara('DPRH')">Carregando..</button>
+        <button class="secondary" onclick="irPara('Expedicao')">Carregando..</button>
+      </div>
+
+      <div class="card" style="margin-top: 12px; background: #fff">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+          "
+        >
+          <div>
+            <b>Status do Banco Interno</b>
+            <div class="muted">
+              Armazenamento local (IndexedDB) para OPs, receitas, programação e etc.
+            </div>
+          </div>
+          <span class="badge" id="dbStatus">Inicializando…</span>
+        </div>
+        <div class="hint">
+          Dica: para não perder dados ao trocar de PC, use o
+          <b>Exportar/Importar</b> no módulo encontrado no PCP.
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 1: PRODUÇÃO -->
+    <div id="telaProducao" style="display: none">
+      <div class="card">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+          "
+        >
+          <div>
+            <b>Módulo: Produção</b>
+            <div class="muted">Apontamento, Entregas e Romaneios</div>
+          </div>
+          <button
+            class="secondary"
+            style="width: auto"
+            onclick="voltarMenu(true)"
+          >
+            MENU
+          </button>
+        </div>
+      </div>
+      <!-- HUB PRODUÇÃO -->
+      <div class="card" id="producaoHub">
+        <h2 style="margin: 0 0 8px 0">Painel Produção</h2>
+        <div class="muted">Escolha o que deseja acessar.</div>
+
+        <div class="grid3" style="margin-top: 12px">
+          <button onclick="prodAbrir('apontamento')">
+            Sistema de Apontamento
+          </button>
+          <button onclick="prodAbrir('encerradas')">
+            OPs Encerradas (Banco)
+          </button>
+        </div>
+
+        <div class="hint" style="margin-top: 10px">
+          Dica: “OPs Encerradas” mostra um resumo parecido com o CSV e permite
+          baixar o CSV original salvo no banco.
+        </div>
+      </div>
+
+      <!-- ÁREA APONTAMENTO -->
+      <div id="producaoApontamentoArea" style="display: none">
+        <!-- tudo que já existe de apontamento fica aqui dentro -->
+        <div class="card">
+          <h2 style="margin: 0 0 8px 0">Sistema de Apontamento - OP</h2>
+          <div class="muted">
+            OP puxa <b>meta</b> e <b>receita prevista</b> travadas (por
+            <b>OP + Item + Data</b>). Você aponta produção por evento:
+            <b>padrão (automático)</b> ou
+            <b>REAL por pesagem (início → fim)</b>.          
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap">
+            <button class="ghost" style="width: auto" onclick="prodVoltarHub()">
+              ⬅ Voltar
+            </button>  
+          </div>
+        </div>
+
+        <!-- 1) ABRIR OP -->
+        <div class="card">
+          <h3 style="margin: 0 0 10px 0">1) Abrir OP</h3>
+
+          <div class="row">
+            <div class="col">
+              <label>OP</label>
+              <input id="opInput" placeholder="Ex.: 001000" />
+            </div>
+
+            <div class="col">
+              <label>Item da OP</label>
+              <input
+                id="itemOpInput"
+                placeholder="Ex.: 01 / 02 / código do item"
+              />
+            </div>
+
+            <div class="col">
+              <label>Data da OP</label>
+              <input id="dataOpInput" type="date" />
+              <div class="hint">
+                A receita e a meta serão buscadas no banco interno pela data.
+              </div>
+            </div>
+
+            <div class="col">
+              <label>Máquina/Linha</label>
+              <select id="maquinaInput">
+                <option>FW1</option>
+                <option>FW2</option>
+              </select>
+            </div>
+
+            <div class="col">
+              <label>Turno</label>
+              <select id="turnoInput">
+                <option>T1</option>
+                <option>T2</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 10px">
+            <div class="col">
+              <button onclick="abrirOP()">Abrir OP</button>
+            </div>
+            <div class="col">
+              <button class="secondary" onclick="resetarTudo()">Resetar</button>
+            </div>
+            <div class="col">
+              <button class="ghost" onclick="irPara('pcp')">
+                Ir para PCP (Cadastrar OP)
+              </button>
+            </div>
+          </div>
+
+          <div id="opInfo" style="margin-top: 12px; display: none">
+            <span class="pill" id="opPill"></span>
+            <span class="pill" id="itemOpPill"></span>
+            <span class="pill" id="dataOpPill"></span>
+            <span class="pill" id="produtoPill"></span>
+            <span class="pill" id="dnPill"></span>
+            <span class="pill" id="metaPill"></span>
+          </div>
+        </div>
+
+        <!-- 1.1) RECEITA PREVISTA TRAVADA -->
+        <div class="card" id="receitaPrevistaCard" style="display: none">
+          <h3 style="margin: 0 0 10px 0">1.1) Receita Prevista (travada)</h3>
+          <div class="muted">
+            Valores por tubo e previsto total calculado: <b>Meta × kg/tubo</b>.
+          </div>
+
+          <table style="margin-top: 10px">
+            <thead>
+              <tr>
+                <th>Insumo</th>
+                <th>kg/tubo (previsto)</th>
+                <th>Meta (tubos)</th>
+                <th>Previsto total (kg)</th>
+              </tr>
+            </thead>
+            <tbody id="receitaPrevistaBody"></tbody>
+          </table>
+        </div>
+
+        <!-- 2) APONTAMENTO -->
+        <div class="card" id="apontamentoCard" style="display: none">
+          <h3 style="margin: 0 0 10px 0">2) Apontamento</h3>
+
+          <div class="row">
+            <div class="col">
+              <div class="mini">
+                <b>Total de tubos apontados:</b>
+                <span id="tubosTotalLbl">0</span>
+              </div>
+              <div class="mini">
+                <b>Saldo de tubos (meta - apontado):</b>
+                <span id="tubosSaldoLbl">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid3" id="cardsItens" style="margin-top: 10px"></div>
+
+          <div class="tabs">
+            <button
+              class="tabbtn active"
+              id="tabPadrao"
+              onclick="setAba('padrao')">              Lançamento padrão (automático)            </button>
+            <button class="tabbtn" id="tabPesagem" onclick="setAba('pesagem')">
+              Lançamento REAL por pesagem (início → fim)
+            </button>
+          </div>
+
+          <!-- ABA PADRÃO -->
+          <div class="subcard" id="abaPadrao" style="margin-top: 10px">
+            <div class="muted">
+              Você informa <b>quantos tubos</b> foram produzidos no evento. O
+              consumo do evento é calculado com base na <b>receita prevista</b>.
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col">
+                <label>Quantidade de tubos no evento</label>
+                <input
+                  id="tubosEventoInput"
+                  type="number"
+                  step="1"
+                  placeholder="Ex.: 5"
+                />
+              </div>
+              <hr class="divider" style="margin:12px 0;" />
+
+<div class="subcard">
+  <div class="muted"><b>Lotes dos Insumos (obrigatório para rastreabilidade)</b></div>
+
+  <div class="row" style="margin-top:10px;">
+    <div class="col">
+      <label>Lote da Resina</label>
+      <input id="lote_padrao_resina" placeholder="Ex.: R9-26005" />
+    </div>
+    <div class="col">
+      <label>Lote do Tecido</label>
+      <input id="lote_padrao_tecido" placeholder="Ex.: 26-26-a" />
+    </div>
+    <div class="col">
+      <label>Lote do Roving</label>
+      <input id="lote_padrao_roving" placeholder="Ex.: 15122025C" />
+    </div>
+    <div class="col">
+      <label>Lote :Areia</label>
+      <input id="lote_padrao_areia" placeholder="Ex.: B03-01-1662025" />
+      <div class="hint">Apenas registro de lote.</div>
+    </div>
+  </div>
+</div>
+
+              <div class="col">
+                <label>Observação (opcional)</label>
+                <input
+                  id="obsEventoInput"
+                  placeholder="Ex.: lote 2 / parada / ajuste etc."
+                />
+              </div>
+              <div class="col" style="align-self: end">
+                <button onclick="adicionarEventoPadrao()">+ Adicionar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABA PESAGEM -->
+          <div
+            class="subcard"
+            id="abaPesagem"
+            style="margin-top: 10px; display: none"
+          >
+            <div class="muted">
+              Você informa <b>quantos tubos</b> e os pesos
+              <b>inicial e final</b> dos insumos. O sistema calcula
+              <b>consumo total</b> e <b>kg/tubo REAL</b> automaticamente.
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col">
+                <label>Quantidade de tubos produzidos no evento</label>
+                <input
+                  id="tubosEventoPesagemInput"
+                  type="number"
+                  step="1"
+                  placeholder="Ex.: 10"
+                  oninput="atualizarPreviewPesagem()"
+                />
+                <div class="hint">
+                  Esse valor é usado para calcular kg/tubo REAL (consumo total ÷
+                  tubos).
+                </div>
+              </div>
+              <div class="col">
+                <label>Observação (opcional)</label>
+                <input
+                  id="obsEventoPesagemInput"
+                  placeholder="Ex.: pesagem do turno / bloco de produção"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col">
+                <label>Resina - Inicial (kg)</label>
+                <input
+                  id="p_resina_ini"
+                  type="number"
+                  step="0.1"
+                  placeholder="Ex.: 220"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Resina - Final (kg)</label>
+                <input
+                  id="p_resina_fim"
+                  type="number"
+                  step="0.1"
+                  placeholder="Ex.: 10"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Tecido - Inicial (kg)</label>
+                <input
+                  id="p_tecido_ini"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Tecido - Final (kg)</label>
+                <input
+                  id="p_tecido_fim"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col">
+                <label>Pintura FW - Inicial (kg)</label>
+                <input
+                  id="p_pintura_ini"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Pintura FW - Final (kg)</label>
+                <input
+                  id="p_pintura_fim"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Outros - Inicial (kg)</label>
+                <input
+                  id="p_outros_ini"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Outros - Final (kg)</label>
+                <input
+                  id="p_outros_fim"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 12px">
+              <div class="col">
+                <label>Roving - Caixa 1 Inicial (kg)</label>
+                <input
+                  id="p_roving_cx1_ini"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Roving - Caixa 1 Final (kg)</label>
+                <input
+                  id="p_roving_cx1_fim"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Roving - Caixa 1 Nº de fios</label>
+                <input
+                  id="p_roving_fios1"
+                  type="number"
+                  step="1"
+                  placeholder="Ex.: 12"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col">
+                <label>Roving - Caixa 2 Inicial (kg)</label>
+                <input
+                  id="p_roving_cx2_ini"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Roving - Caixa 2 Final (kg)</label>
+                <input
+                  id="p_roving_cx2_fim"
+                  type="number"
+                  step="0.1"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+              <div class="col">
+                <label>Roving - Caixa 2 Nº de fios</label>
+                <input
+                  id="p_roving_fios2"
+                  type="number"
+                  step="1"
+                  placeholder="Ex.: 12"
+                  oninput="atualizarPreviewPesagem()"
+                />
+              </div>
+            </div>
+              <hr class="divider" style="margin:12px 0;" />
+
+<div class="subcard">
+  <div class="muted"><b>Lotes dos Insumos (obrigatório para rastreabilidade)</b></div>
+
+  <div class="row" style="margin-top:10px;">
+    <div class="col">
+      <label>Lote Resina</label>
+      <input id="lote_pesagem_resina" placeholder="" />
+    </div>
+    <div class="col">
+      <label>Lote Tecido</label>
+      <input id="lote_pesagem_tecido" placeholder="" />
+    </div>
+    <div class="col">
+      <label>Lote Roving</label>
+      <input id="lote_pesagem_roving" placeholder="" />
+    </div>
+    <div class="col">
+      <label>Lote Areia (somente rastreio)</label>
+      <input id="lote_pesagem_areia" placeholder="" />
+      <div class="hint">Apenas registro de lote.</div>
+    </div>
+  </div>
+</div>
+
+            <div class="card" style="margin: 12px 0 0 0; background: #fff">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <b>Prévia do cálculo (Total e Média por tubo)</b>
+                <span class="muted" id="previaHint"
+                  >Preencha tubos e os pesos para ver a média.</span
+                >
+              </div>
+
+              <table style="margin-top: 10px">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Total (kg)</th>
+                    <th>Média (kg/tubo)</th>
+                  </tr>
+                </thead>
+                <tbody id="previaPesagemBody">
+                  <tr>
+                    <td class="muted" colspan="3">Sem dados ainda.</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Total geral</th>
+                    <th id="previaTotalGeral">0,000</th>
+                    <th id="previaMediaGeral">-</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col">
+                <button onclick="adicionarEventoPesagem()">
+                  + Adicionar pesagem
+                </button>
+                <div class="hint">
+                  O evento fica registrado no histórico e entra no resumo
+                  automaticamente.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="row">
+            <div class="col">
+              <h4 style="margin: 0 0 6px 0">Ajuste manual (opcional)</h4>
+              <div class="muted">
+                Correções pontuais em kg (ex.: acerto de estoque). Use com
+                motivo obrigatório.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label>Item</label>
+              <select id="ajusteItemSelect"></select>
+            </div>
+            <div class="col">
+              <label>Ajuste (kg) — pode ser negativo</label>
+              <input
+                id="ajusteKgInput"
+                type="number"
+                step="0.1"
+                placeholder="Ex.: -10.0 ou 5.0"
+              />
+            </div>
+            <div class="col">
+              <label>Motivo (obrigatório)</label>
+              <input
+                id="ajusteObsInput"
+                placeholder="Ex.: correção de leitura / ajuste estoque"
+              />
+            </div>
+            <div class="col" style="align-self: end">
+              <button class="secondary" onclick="adicionarAjusteManual()">
+                Aplicar ajuste
+              </button>
+            </div>
+          </div>
+
+          <div style="margin-top: 12px">
+            <div class="muted">
+              Histórico (eventos) — <b>resumido</b> (use “Detalhes” para ver
+              tudo)
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Hora</th>
+                  <th>Tipo</th>
+                  <th>Detalhe</th>
+                  <th>Obs</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="historicoBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3) RESUMO -->
+        <div class="card" id="resumoCard" style="display: none">
+          <h3 style="margin: 0 0 10px 0">3) Resumo e Saída</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>kg/tubo previsto</th>
+                <th>Previsto (kg)</th>
+                <th>Real (kg)</th>
+                <th>Saldo (kg)</th>
+                <th>% Real/Prev</th>
+                <th>Média Real por evento</th>
+              </tr>
+            </thead>
+            <tbody id="resumoBody"></tbody>
+          </table>
+
+          <div style="margin-top: 10px" class="row">
+            <div class="col">
+              <label>Observações finais</label>
+              <textarea
+                id="obsFinal" rows="3" oninput="publicarLiver();" placeholder="Anotar desvios, ocorrências, etc."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 10px">
+            <button onclick="copiarResumo()">Copiar resumo</button>
+            <button class="secondary" onclick="compartilharResumo()">
+              Compartilhar
+            </button>
+            <div class="col">
+              <button class="secondary" onclick="baixarCSV()">
+                Gerar Relatório
+              </button>
+            </div>
+            <div class="col">
+              <button class="danger" onclick="encerrarOP()">Encerrar OP</button>
+            </div>
+          </div>
+
+          <div id="statusMsg" class="muted" style="margin-top: 10px"></div>
+        </div>
+
+        <!-- GRÁFICO -->
+        <div
+          id="graficoCard"
+          style="margin-top: 14px; display: none"
+          class="subcard"
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 12px;
+              flex-wrap: wrap;
+            "
+          >
+            <div>
+              <b>Gráfico – Previsto vs Real (kg)</b>
+              <div class="muted">
+                Atualiza automaticamente conforme você lança eventos/ajustes.
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center">
+              <label
+                style="
+                  display: flex;
+                  gap: 8px;
+                  align-items: center;
+                  margin: 0;
+                  font-size: 12px;
+                "
+              >
+                <input
+                  type="checkbox"
+                  id="grafMostrarSaldo"
+                  checked
+                  style="width: auto"
+                  onchange="renderGraficoResumo()"
+                />
+                Mostrar saldo
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px">
+            <canvas
+              id="grafResumo"
+              height="220"
+              style="
+                width: 100%;
+                border: 1px solid #e8edf2;
+                border-radius: 12px;
+                background: #fff;
+              "
+            ></canvas>
+            <div class="hint">
+              Dica: se abrir no celular em paisagem, fica bem mais legível.
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL DOS DETALHES EVENTO -->
+        <div
+          id="modalDetalhes"
+          style="
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 9999;
+          "
+        >
+          <div
+            style="
+              background: white;
+              border-radius: 14px;
+              max-width: 900px;
+              width: 100%;
+              box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+              overflow: hidden;
+            "
+          >
+            <div
+              style="
+                padding: 14px;
+                border-bottom: 1px solid #e8edf2;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <div>
+                <b id="modalTitulo">Detalhes do evento</b>
+                <div class="muted" id="modalSubtitulo"></div>
+              </div>
+              <button
+                class="secondary"
+                style="width: auto; padding: 10px 12px"
+                onclick="fecharDetalhes()"
+              >
+                Fechar
+              </button>
+            </div>
+
+            <div style="padding: 14px">
+              <div class="card" style="margin: 0">
+                <div class="muted" style="margin-bottom: 8px">
+                  Detalhamento completo
+                </div>
+                <div id="modalConteudo"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ÁREA OPs ENCERRADAS (BANCO) -->
+    <div id="producaoEncerradasArea" style="display: none">
+      <div class="card">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+          "
+        >
+          <div>
+            <h3 style="margin: 0">OPs Encerradas (Histórico)</h3>
+            <div class="muted">
+              Consulta resumida (estilo CSV) direto do banco interno.
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap">
+            <button
+              class="secondary"
+              style="width: auto"
+              onclick="prodRecarregarEncerradas()"
+            >
+              Atualizar
+            </button>
+            <button class="ghost" style="width: auto" onclick="prodVoltarHub()">
+              ⬅ Voltar
+            </button>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <div class="row">
+          <div class="col">
+            <label>Filtro rápido (OP / Item / Produto / Data)</label>
+            <input
+              id="histFiltro"
+              placeholder="Digite para filtrar…"
+              oninput="prodFiltrarEncerradas()"
+            />
+          </div>
+        </div>
+
+        <div style="margin-top: 10px">
+          <table>
+            <thead>
+              <tr>
+                <th>Encerrada em</th>
+                <th>OP/Item/Data</th>
+                <th>Produto</th>
+                <th class="right">Meta</th>
+                <th class="right">Real</th>
+                <th class="right">Eficiência</th>
+                <th class="right">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="histListaBody">
+              <tr>
+                <td class="muted" colspan="7">Carregando…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="hint" style="margin-top: 10px">
+          “Resumo” abre um painel curto com os principais números e top desvios.
+          “Baixar CSV” baixa exatamente o CSV final salvo no histórico.
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DO RESUMO HISTÓRICO -->
+    <div
+      id="modalHistResumo"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        z-index: 9999;
+      "
+    >
+      <div
+        style="
+          background: white;
+          border-radius: 14px;
+          max-width: 980px;
+          width: 100%;
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+          overflow: hidden;
+        "
+      >
+        <div
+          style="
+            padding: 14px;
+            border-bottom: 1px solid #e8edf2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <b id="histModalTitulo">Resumo</b>
+            <div class="muted" id="histModalSub"></div>
+          </div>
+          <button
+            class="secondary"
+            style="width: auto; padding: 10px 12px"
+            onclick="prodFecharHistResumo()"
+          >
+            Fechar
+          </button>
+        </div>
+        <div style="padding: 14px">
+          <div class="card" style="margin: 0">
+            <div id="histModalConteudo"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- TELA 2: PCP -->
+    <div id="telaPCP" style="display: none">
+      <div class="card">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+          "
+        >
+          <div>
+            <b>Módulo: PCP</b>
+            <div class="muted">
+              Cadastro de OP + Receita travada + Programação (banco interno)
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap">
+            <button
+              class="ghost"
+              style="width: auto"
+              onclick="irPara('producao')"
+            >
+              Ir para Produção
+            </button>
+            <button
+              class="secondary"
+              style="width: auto"
+              onclick="voltarMenu(false)"
+            >
+              MENU
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top: 10px">
+          <span class="pillYellow" id="pcpModoEdicao" style="display: none"
+            >Modo EDIÇÃO ativado</span
+          >
+          <span
+            class="muted"
+            id="pcpEdicaoHint"
+            style="display: none; margin-left: 8px"
+            >Você carregou uma OP para editar. Ajuste e clique em "Salvar OP" /
+            "Salvar Receita".</span
+          >
+        </div>
+      </div>
+
+      <!-- HUB PCP -->
+      <div class="card" id="pcpHome">
+        <h3 style="margin: 0 0 10px 0">Painel PCP</h3>
+        <div class="muted">Escolha o que deseja acessar.</div>
+
+        <div class="pcpHomeButtons" style="margin-top: 12px">
+          <button onclick="pcpAbrirBloco('cadastro')">
+            Cadastro OP / Receita
+          </button>
+          <button onclick="pcpAbrirBloco('programacao')">Programação</button>
+        </div>
+
+        <div class="hint" style="margin-top: 10px">
+          Tela clean: por padrão fica só os botões. Clique para abrir e use
+          “Fechar” dentro do bloco.
+        </div>
+      </div>
+
+      <!-- ====== BLOCO CADASTRO ====== -->
+      <div id="pcpCadastroArea" style="display: none">
+        <div class="card">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 10px;
+              flex-wrap: wrap;
+            "
+          >
+            <div>
+              <h3 style="margin: 0">Cadastro OP / Receita</h3>
+              <div class="muted">
+                Cadastre OP + Item + Data + Turno. Depois cadastre a receita.
+              </div>
+            </div>
+            <button
+              class="ghost" style="width: auto"
+              onclick="pcpFecharBlocos()"
+            >
+              ⬅ Voltar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin: 0 0 10px 0">1) Cadastrar/Editar OP (Cabeçalho)</h3>
+
+          <div class="row" style="margin-top: 10px">
+            <div class="col">
+              <label>OP</label>
+              <input id="pcp_op" placeholder="Ex.: 001000" />
+            </div>
+            <div class="col">
+              <label>Item da OP</label>
+              <input id="pcp_item" placeholder="Ex.: 01" />
+            </div>
+            <div class="col">
+              <label>Data</label>
+              <input id="pcp_data" type="date" />
+            </div>
+            <div class="col">
+              <label>Turno</label>
+              <select id="pcp_turno">
+                <option value="T1">T1</option>
+                <option value="T2">T2</option>
+              </select>
+            </div>
+            <div class="col">
+              <label>Meta (tubos)</label>
+              <input
+                id="pcp_meta"
+                type="number"
+                step="1"
+                placeholder="Ex.: 72"
+              />
+            </div>
+            <div class="col">
+              <label>DN</label>
+              <input id="pcp_dn" placeholder="Ex.: DN - 350" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 10px">
+            <div class="col">
+              <label>Produto (descrição)</label>
+              <input
+                id="pcp_produto"
+                placeholder="Descrição completa do produto"
+              />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 10px">
+            <div class="col">
+              <button onclick="pcpSalvarOP()">Salvar OP</button>
+              <div class="hint">
+                Salva/atualiza o cabeçalho (inclui Turno). A receita é no bloco
+                2.
+              </div>
+            </div>
+            <div class="col">
+              <button class="secondary" onclick="pcpCarregarParaReceita()">
+                Carregar chave para receita
+              </button>
+              <div class="hint">
+                Usa OP/Item/Data acima e prepara o cadastro de receita.
+              </div>
+            </div>
+            <div class="col">
+              <button class="ghost" onclick="pcpLimparFormulario()">
+                Limpar formulário
+              </button>
+              <div class="hint">Sai do modo edição e limpa campos.</div>
+            </div>
+          </div>
+
+          <div id="pcpStatus" class="muted" style="margin-top: 10px"></div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin: 0 0 10px 0">
+            2) Cadastrar/Editar Receita (kg/tubo) — por OP/Item/Data
+          </h3>
+          <div class="muted">
+            Cadastre insumos padrão e também adicione novos.
+          </div>
+
+          <div class="subcard" style="margin-top: 10px">
+            <div class="row">
+              <div class="col">
+                <label>OP</label
+                ><input id="pcp_rec_op" placeholder="Ex.: 001000" />
+              </div>
+              <div class="col">
+                <label>Item da OP</label
+                ><input id="pcp_rec_item" placeholder="Ex.: 01" />
+              </div>
+              <div class="col">
+                <label>Data</label><input id="pcp_rec_data" type="date" />
+              </div>
+            </div>
+
+            <div style="margin-top: 10px">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Insumo</th>
+                    <th class="right">kg/tubo</th>
+                    <th class="right">Ação</th>
+                  </tr>
+                </thead>
+                <tbody id="pcpReceitaBody"></tbody>
+              </table>
+
+              <div class="row" style="margin-top: 10px">
+                <div class="col">
+                  <button class="ghost" onclick="pcpAdicionarLinhaInsumo()">
+                    + Adicionar insumo
+                  </button>
+                </div>
+                <div class="col">
+                  <button onclick="pcpSalvarReceita()">
+                    Salvar/Atualizar Receita
+                  </button>
+                </div>
+                <div class="col">
+                  <button
+                    class="secondary"
+                    onclick="pcpCarregarReceitaExistente()"
+                  >
+                    Carregar receita existente
+                  </button>
+                </div>
+              </div>
+
+              <div class="hint">
+                Dica: “Salvar/Atualizar” grava cada insumo como registro no
+                banco. Você pode editar os valores e salvar novamente.
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="pcpReceitaStatus"
+            class="muted"
+            style="margin-top: 10px"
+          ></div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin: 0 0 10px 0">3) OPs cadastradas (Banco Interno)</h3>
+          <div class="muted">Agora com <b>Editar</b> + Turno gravado.</div>
+
+          <div class="row" style="margin-top: 10px">
+            <div class="col">
+              <button class="secondary" onclick="pcpRecarregarListaOPs()">
+                Atualizar lista
+              </button>
+            </div>
+            <div class="col">
+              <button class="ghost" onclick="exportarBackupJSON()">
+                Exportar Backup (JSON)
+              </button>
+            </div>
+            <div class="col">
+              <label style="margin-bottom: 6px">Importar Backup (JSON)</label>
+              <input
+                type="file"
+                id="importJsonInput"
+                accept=".json,application/json"
+                onchange="importarBackupJSON(event)"
+              />
+            </div>
+          </div>
+
+          <div style="margin-top: 10px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Chave (OP/Item/Data)</th>
+                  <th>Produto</th>
+                  <th>Turno</th>
+                  <th class="right">Meta</th>
+                  <th class="right">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="pcpListaOpsBody">
+                <tr>
+                  <td class="muted" colspan="5">Carregando…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="hint">
+            Se você limpar cache/armazenamento do navegador, você perde o banco
+            — por isso o backup em JSON.
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== BLOCO PROGRAMAÇÃO ====== -->
+      <div id="pcpProgArea" style="display: none">
+        <div class="card">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 10px;
+              flex-wrap: wrap;
+            "
+          >
+            <div>
+              <h3 style="margin: 0">Programação</h3>
+              <div class="muted">
+                Monta programação e já cadastra OP com Data + Turno.
+              </div>
+            </div>
+            <button
+              class="ghost" style="width: auto"
+              onclick="pcpFecharBlocos()"
+            >
+              ⬅ Voltar
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin: 0 0 10px 0">
+            1) Montar Programação (e já cadastrar OP com data)
+          </h3>
+
+          <div class="subcard" style="margin-top: 10px">
+            <div class="row">
+              <div class="col">
+                <label>Data da programação</label
+                ><input id="prog_data" type="date" />
+              </div>
+              <div class="col">
+                <label>Turno</label>
+                <select id="prog_turno">
+                  <option value="T1">T1</option>
+                  <option value="T2">T2</option>
+                </select>
+              </div>
+              <div class="col">
+                <label>OP</label
+                ><input id="prog_op" placeholder="Ex.: 001000" />
+              </div>
+              <div class="col">
+                <label>Item da OP</label
+                ><input id="prog_item" placeholder="Ex.: 01" />
+              </div>
+              <div class="col">
+                <label>Meta (tubos)</label
+                ><input
+                  id="prog_meta"
+                  type="number"
+                  step="1"
+                  placeholder="Ex.: 72"
+                />
+              </div>
+              <div class="col">
+                <label>DN</label
+                ><input id="prog_dn" placeholder="Ex.: DN - 350" />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col">
+                <label>Produto (descrição)</label
+                ><input
+                  id="prog_produto"
+                  placeholder="Descrição completa do produto"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+              <div class="col">
+                <button onclick="progAdicionar()">
+                  Adicionar na programação
+                </button>
+                <div class="hint">
+                  Grava na Programação e salva o cabeçalho da OP (inclui Turno).
+                </div>
+              </div>
+              <div class="col">
+                <button class="secondary" onclick="progRecarregar()">
+                  Atualizar lista
+                </button>
+              </div>
+              <div class="col">
+                <button class="ghost" onclick="progLimparCampos()">
+                  Limpar campos
+                </button>
+              </div>
+            </div>
+
+            <div id="progStatus" class="muted" style="margin-top: 10px"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin: 0 0 10px 0">2) Programação salva</h3>
+
+          <div class="row" style="margin-top: 10px">
+            <div class="col">
+              <label>Filtrar por data</label>
+              <input
+                id="prog_filtro_data"
+                type="date"
+                oninput="progRecarregar()"
+              />
+            </div>
+            <div class="col" style="align-self: end">
+              <button class="secondary" onclick="progRecarregar()">
+                Aplicar filtro
+              </button>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Turno</th>
+                  <th>OP/Item</th>
+                  <th>Produto</th>
+                  <th class="right">Meta</th>
+                  <th class="right">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="progListaBody">
+                <tr>
+                  <td class="muted" colspan="6">Carregando…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="hint">
+            “Editar OP” abre o cadastro já preenchido (cabeçalho + receita).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 3: ALMOXARIFADO -->
+    <div id="telaAlmox" style="display: none">
+      <div class="card">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <b>Módulo: Almoxarifado</b>
+            <div class="muted">Em desenvolvimento!</div>
+          </div>
+          <button
+            class="secondary"
+            style="width: auto"
+            onclick="voltarMenu(false)"          >MENU          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 4: COMERCIAL -->
+    <div id="telaComercial" style="display: none">
+      <div class="card">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <b>Módulo: Comercial</b>
+            <div class="muted">Em desenvolvimento!</div>
+          </div>
+          <button
+            class="secondary"
+            style="width: auto"
+            onclick="voltarMenu(false)"          >MENU          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 5: MARKETING -->
+    <div id="telaMarketing" style="display: none">
+      <div class="card">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <b>Módulo: Marketing</b>
+            <div class="muted">Em desenvolvimento!</div>
+          </div>
+          <button
+            class="secondary"
+            style="width: auto"
+            onclick="voltarMenu(false)"          >MENU          </button>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 6: DP & RH -->
+    <div id="telaDPRH" style="display: none">
+      <div class="card">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <b>Módulo: DP & RH</b>
+            <div class="muted">Em desenvolvimento!</div>
+          </div>
+          <button
+            class="secondary"
+            style="width: auto"
+            onclick="voltarMenu(false)"          >MENU          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 7: EXPEDIÇÃO -->
+    <div id="telaExpedicao" style="display: none">
+      <div class="card">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+          "
+        >
+          <div>
+            <b>Módulo: Expedição</b>
+            <div class="muted">Em desenvolvimento!</div>
+          </div>
+          <button
+            class="secondary"
+            style="width: auto"
+            onclick="voltarMenu(false)"          >MENU          </button>
+        </div>
+      </div>
+    </div>
+<!-- @COPYRIGHT CODE BY TAVIOO -->
+    <script>
+
+      // =========================================================
+      // 0) TELA / NAVEGAÇÃO (<!-- @COPYRIGHT CODE BY TAVIOO -->)
+      // =========================================================
+      function esconderTodasTelas() {
+        [
+          "telaMenu",
+          "telaProducao",
+          "telaPCP",
+          "telaAlmox",
+          "telaComercial",
+          "telaMarketing",
+          "telaDPRH",
+          "telaExpedicao",
+        ].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = "none";
+        });
+      }
+
+      function irPara(modulo) {
+        esconderTodasTelas();
+
+        if (modulo === "producao") {
+          document.getElementById("telaProducao").style.display = "block";
+          prodAbrir(); // HUB
+          return;
+        }
+        if (modulo === "pcp") {
+          document.getElementById("telaPCP").style.display = "block";
+          pcpFecharBlocos();
+          pcpRecarregarListaOPs();
+          progRecarregar();
+          return;
+        }
+        if (modulo === "almox")
+          return (document.getElementById("telaAlmox").style.display = "block");
+        if (modulo === "comercial")
+          return (document.getElementById("telaComercial").style.display =
+            "block");
+        if (modulo === "marketing")
+          return (document.getElementById("telaMarketing").style.display =
+            "block");
+        if (modulo === "DPRH")
+          return (document.getElementById("telaDPRH").style.display = "block");
+        if (modulo === "Expedicao")
+          return (document.getElementById("telaExpedicao").style.display =
+            "block");
+
+        document.getElementById("telaMenu").style.display = "block";
+      }
+
+      function voltarMenu(limparProducao) {
+        if (limparProducao && typeof resetarTudo === "function") resetarTudo();
+        esconderTodasTelas();
+        document.getElementById("telaMenu").style.display = "block";
+      }
+
+      function pcpAbrirBloco(tipo) {
+        document.getElementById("pcpHome").style.display = "none";
+        document.getElementById("pcpCadastroArea").style.display =
+          tipo === "cadastro" ? "block" : "none";
+        document.getElementById("pcpProgArea").style.display =
+          tipo === "programacao" ? "block" : "none";
+        if (tipo === "cadastro") pcpRecarregarListaOPs();
+        if (tipo === "programacao") progRecarregar();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function pcpFecharBlocos() {
+        document.getElementById("pcpHome").style.display = "block";
+        document.getElementById("pcpCadastroArea").style.display = "none";
+        document.getElementById("pcpProgArea").style.display = "none";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // =========================================================
+      // 1) BANCO INTERNO (IndexedDB)
+      // =========================================================
+      const DB_NAME = "VetroDB";
+      const DB_VERSION = 4;
+      let db = null;
+
+      function keyOP(op, itemOp, data) {
+        const o = String(op || "").trim();
+        const i = String(itemOp || "").trim();
+        const d = String(data || "").trim();
+        return `${o}__${i}__${d}`;
+      }
+
+      function setDbStatus(texto) {
+        const el = document.getElementById("dbStatus");
+        if (el) el.textContent = texto;
+      }
+
+      function abrirBanco() {
+        return new Promise((resolve, reject) => {
+          const req = indexedDB.open(DB_NAME, DB_VERSION);
+
+          req.onupgradeneeded = (evt) => {
+            const _db = evt.target.result;
+
+            if (!_db.objectStoreNames.contains("OPS")) {
+              const storeOPS = _db.createObjectStore("OPS", { keyPath: "key" });
+              storeOPS.createIndex("op_id", "op_id", { unique: false });
+              storeOPS.createIndex("item_op", "item_op", { unique: false });
+              storeOPS.createIndex("data", "data", { unique: false });
+            }
+
+            if (!_db.objectStoreNames.contains("RECEITAS")) {
+              const storeR = _db.createObjectStore("RECEITAS", {
+                keyPath: "key",
+              });
+              storeR.createIndex("opKey", "opKey", { unique: false });
+              storeR.createIndex("insumo", "insumo", { unique: false });
+            }
+
+            if (!_db.objectStoreNames.contains("PROGRAMACAO")) {
+              const storeP = _db.createObjectStore("PROGRAMACAO", {
+                keyPath: "key",
+              });
+              storeP.createIndex("data", "data", { unique: false });
+            }
+            if (!_db.objectStoreNames.contains("HIST_OP")) {
+              const storeH = _db.createObjectStore("HIST_OP", {
+                keyPath: "key",
+              });
+              storeH.createIndex("opKey", "opKey", { unique: false });
+              storeH.createIndex("encerradaEm", "encerradaEm", {
+                unique: false,
+              });
+            }
+          };
+
+          req.onsuccess = (evt) => {
+            db = evt.target.result;
+            setDbStatus("OK (Banco pronto)");
+            resolve(db);
+          };
+
+          req.onerror = () => {
+            setDbStatus("ERRO");
+            reject(new Error("Falha ao abrir IndexedDB"));
+          };
+        });
+      }
+
+      function tx(storeName, mode = "readonly") {
+        const t = db.transaction(storeName, mode);
+        return t.objectStore(storeName);
+      }
+
+      function putOPCabecalho({
+        op_id,
+        item_op,
+        data,
+        turno,
+        produto,
+        dn,
+        meta_tubos,
+      }) {
+        return new Promise((resolve, reject) => {
+          const store = tx("OPS", "readwrite");
+          const registro = {
+            key: keyOP(op_id, item_op, data),
+            op_id: String(op_id).trim(),
+            item_op: String(item_op).trim(),
+            data: String(data).trim(),
+            turno: String(turno || "").trim(), // <-- NOVO
+            produto: String(produto || "").trim(),
+            dn: String(dn || "").trim(),
+            meta_tubos: Number(meta_tubos || 0),
+            updatedAt: Date.now(),
+          };
+          const req = store.put(registro);
+          req.onsuccess = () => resolve(registro);
+          req.onerror = () => reject(new Error("Erro ao salvar OP"));
+        });
+      }
+
+      function getOPCabecalho(op_id, item_op, data) {
+        return new Promise((resolve, reject) => {
+          const store = tx("OPS", "readonly");
+          const req = store.get(keyOP(op_id, item_op, data));
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => reject(new Error("Erro ao buscar OP"));
+        });
+      }
+
+      function deleteOPCabecalho(opKey) {
+        return new Promise((resolve, reject) => {
+          const store = tx("OPS", "readwrite");
+          const req = store.delete(opKey);
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => reject(new Error("Erro ao excluir OP"));
+        });
+      }
+
+      function putReceitaLinha({ op_id, item_op, data, insumo, kg_por_tubo }) {
+        return new Promise((resolve, reject) => {
+          const opKey = keyOP(op_id, item_op, data);
+          const store = tx("RECEITAS", "readwrite");
+          const reg = {
+            key: `${opKey}__${String(insumo).trim()}`,
+            opKey,
+            op_id: String(op_id).trim(),
+            item_op: String(item_op).trim(),
+            data: String(data).trim(),
+            insumo: String(insumo).trim(),
+            kg_por_tubo: Number(kg_por_tubo || 0),
+            updatedAt: Date.now(),
+          };
+          const req = store.put(reg);
+          req.onsuccess = () => resolve(reg);
+          req.onerror = () => reject(new Error("Erro ao salvar receita"));
+        });
+      }
+
+      function deleteReceitasByOpKey(opKey) {
+        return new Promise((resolve, reject) => {
+          const store = tx("RECEITAS", "readwrite");
+          const idx = store.index("opKey");
+          const req = idx.openCursor(IDBKeyRange.only(opKey));
+          req.onsuccess = (evt) => {
+            const cursor = evt.target.result;
+            if (cursor) {
+              store.delete(cursor.primaryKey);
+              cursor.continue();
+            } else resolve(true);
+          };
+          req.onerror = () => reject(new Error("Erro ao excluir receitas"));
+        });
+      }
+
+      function getReceitasByOpKey(opKey) {
+        return new Promise((resolve, reject) => {
+          const store = tx("RECEITAS", "readonly");
+          const idx = store.index("opKey");
+          const req = idx.openCursor(IDBKeyRange.only(opKey));
+          const out = [];
+          req.onsuccess = (evt) => {
+            const cursor = evt.target.result;
+            if (cursor) {
+              out.push(cursor.value);
+              cursor.continue();
+            } else resolve(out);
+          };
+          req.onerror = () => reject(new Error("Erro ao buscar receitas"));
+        });
+      }
+
+      function listAllOPs() {
+        return new Promise((resolve, reject) => {
+          const store = tx("OPS", "readonly");
+          const req = store.openCursor();
+          const out = [];
+          req.onsuccess = (evt) => {
+            const cursor = evt.target.result;
+            if (cursor) {
+              out.push(cursor.value);
+              cursor.continue();
+            } else {
+              out.sort(
+                (a, b) =>
+                  String(b.data).localeCompare(String(a.data)) ||
+                  String(a.op_id).localeCompare(String(b.op_id)),
+              );
+              resolve(out);
+            }
+          };
+          req.onerror = () => reject(new Error("Erro ao listar OPs"));
+        });
+      }
+
+      // ===== Programação =====
+      function keyProg(data, op, item) {
+        return `${String(data).trim()}__${String(op).trim()}__${String(item).trim()}`;
+      }
+
+      function putProg({
+        data,
+        turno,
+        op_id,
+        item_op,
+        produto,
+        dn,
+        meta_tubos,
+      }) {
+        return new Promise((resolve, reject) => {
+          const store = tx("PROGRAMACAO", "readwrite");
+          const reg = {
+            key: keyProg(data, op_id, item_op),
+            data: String(data).trim(),
+            turno: String(turno || "").trim(),
+            op_id: String(op_id).trim(),
+            item_op: String(item_op).trim(),
+            produto: String(produto || "").trim(),
+            dn: String(dn || "").trim(),
+            meta_tubos: Number(meta_tubos || 0),
+            updatedAt: Date.now(),
+          };
+          const req = store.put(reg);
+          req.onsuccess = () => resolve(reg);
+          req.onerror = () => reject(new Error("Erro ao salvar programação"));
+        });
+      }
+
+      function deleteProg(key) {
+        return new Promise((resolve, reject) => {
+          const store = tx("PROGRAMACAO", "readwrite");
+          const req = store.delete(key);
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => reject(new Error("Erro ao excluir programação"));
+        });
+      }
+
+      function listProg(filterDate = "") {
+        return new Promise((resolve, reject) => {
+          const store = tx("PROGRAMACAO", "readonly");
+          const out = [];
+
+          if (filterDate) {
+            const idx = store.index("data");
+            const req = idx.openCursor(
+              IDBKeyRange.only(String(filterDate).trim()),
+            );
+            req.onsuccess = (evt) => {
+              const cursor = evt.target.result;
+              if (cursor) {
+                out.push(cursor.value);
+                cursor.continue();
+              } else {
+                out.sort((a, b) =>
+                  String(a.op_id).localeCompare(String(b.op_id)),
+                );
+                resolve(out);
+              }
+            };
+            req.onerror = () =>
+              reject(new Error("Erro ao listar programação (filtro)"));
+          } else {
+            const req = store.openCursor();
+            req.onsuccess = (evt) => {
+              const cursor = evt.target.result;
+              if (cursor) {
+                out.push(cursor.value);
+                cursor.continue();
+              } else {
+                out.sort(
+                  (a, b) =>
+                    String(b.data).localeCompare(String(a.data)) ||
+                    String(a.op_id).localeCompare(String(b.op_id)),
+                );
+                resolve(out);
+              }
+            };
+            req.onerror = () => reject(new Error("Erro ao listar programação"));
+          }
+        });
+      }
+      function keyHist(opKey, encerradaEm) {
+        return `${opKey}__${encerradaEm}`;
+      }
+
+      function putHistoricoOP(payload) {
+        return new Promise((resolve, reject) => {
+          const store = tx("HIST_OP", "readwrite");
+          const req = store.put(payload);
+          req.onsuccess = () => resolve(payload);
+          req.onerror = () =>
+            reject(new Error("Erro ao salvar histórico da OP"));
+        });
+      }
+
+      function listHistoricoOP(limit = 200) {
+        return new Promise((resolve, reject) => {
+          const store = tx("HIST_OP", "readonly");
+          const out = [];
+          const req = store.openCursor();
+          req.onsuccess = (evt) => {
+            const cursor = evt.target.result;
+            if (cursor) {
+              out.push(cursor.value);
+              cursor.continue();
+            } else {
+              out.sort((a, b) => (b.encerradaEm || 0) - (a.encerradaEm || 0));
+              resolve(out.slice(0, limit));
+            }
+          };
+          req.onerror = () => reject(new Error("Erro ao listar histórico"));
+        });
+      }
+
+      function deleteHistorico(key) {
+        return new Promise((resolve, reject) => {
+          const store = tx("HIST_OP", "readwrite");
+          const req = store.delete(key);
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => reject(new Error("Erro ao excluir histórico"));
+        });
+      }
+
+      function baixarCSVTexto(nomeArquivo, texto) {
+        const blob = new Blob([texto], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = nomeArquivo;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+      // =========================================================
+      // PRODUÇÃO HUB + HISTÓRICO DE OPs ENCERRADAS
+      // =========================================================
+      let HIST_CACHE = [];
+      let HIST_VIEW = [];
+
+      function prodAbrir(tela) {
+        // esconde tudo
+        const hub = document.getElementById("producaoHub");
+        const ap = document.getElementById("producaoApontamentoArea");
+        const hist = document.getElementById("producaoEncerradasArea");
+
+        if (hub) hub.style.display = "none";
+        if (ap) ap.style.display = "none";
+        if (hist) hist.style.display = "none";
+
+        if (tela === "apontamento") {
+          if (ap) ap.style.display = "block";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+
+        if (tela === "encerradas") {
+          if (hist) hist.style.display = "block";
+          prodRecarregarEncerradas();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+
+        // default: hub
+        if (hub) hub.style.display = "block";
+      }
+
+      function prodVoltarHub() {
+        const hub = document.getElementById("producaoHub");
+        const ap = document.getElementById("producaoApontamentoArea");
+        const hist = document.getElementById("producaoEncerradasArea");
+        if (ap) ap.style.display = "none";
+        if (hist) hist.style.display = "none";
+        if (hub) hub.style.display = "block";
+      }
+
+      function fmtDataHoraBRFromTs(ts) {
+        const dt = new Date(ts);
+        return fmtDataHoraBR(dt);
+      }
+
+      function prodSetHistLista(itens) {
+        HIST_VIEW = itens || [];
+        const body = document.getElementById("histListaBody");
+        if (!body) return;
+
+        if (!HIST_VIEW.length) {
+          body.innerHTML = `<tr><td class="muted" colspan="7">Nenhuma OP encerrada encontrada no histórico.</td></tr>`;
+          return;
+        }
+
+        body.innerHTML = "";
+        HIST_VIEW.forEach((h) => {
+          const r = h.resumo || {};
+          const dt = h.encerradaEm ? fmtDataHoraBRFromTs(h.encerradaEm) : "-";
+          const ef = Number(r.eficienciaPct || 0);
+          const efTxt = fmtNumBR(ef, 2) + "%";
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+      <td>${dt}</td>
+      <td><b>${r.op || ""}/${r.itemOp || ""}/${r.dataOp || ""}</b></td>
+      <td>${r.produto || ""}</td>
+      <td class="right">${Number(r.metaTubos || 0)}</td>
+      <td class="right">${Number(r.tubosApontados || 0)}</td>
+      <td class="right"><b>${efTxt}</b></td>
+      <td class="right" style="white-space:nowrap;">
+        <button class="secondary" style="width:auto; padding:8px 10px; border-radius:10px; margin-right:8px;"
+          onclick="prodAbrirResumoHist('${h.key}')">Resumo</button>
+        <button class="ghost" style="width:auto; padding:8px 10px; border-radius:10px; margin-right:8px;"
+          onclick="prodBaixarCsvHist('${h.key}')">Baixar CSV</button>
+        <button class="danger" style="width:auto; padding:8px 10px; border-radius:10px;"
+          onclick="prodExcluirHist('${h.key}')">Excluir</button>
+      </td>
+    `;
+          body.appendChild(tr);
+        });
+      }
+
+      async function prodRecarregarEncerradas() {
+        const body = document.getElementById("histListaBody");
+        if (body)
+          body.innerHTML = `<tr><td class="muted" colspan="7">Carregando…</td></tr>`;
+
+        try {
+          HIST_CACHE = await listHistoricoOP(500);
+          prodFiltrarEncerradas(); // aplica filtro atual
+        } catch (e) {
+          if (body)
+            body.innerHTML = `<tr><td class="warn" colspan="7">Erro ao carregar histórico: ${String(e?.message || e)}</td></tr>`;
+        }
+      }
+
+      function prodFiltrarEncerradas() {
+        const f = String(document.getElementById("histFiltro")?.value || "")
+          .trim()
+          .toLowerCase();
+        if (!f) return prodSetHistLista(HIST_CACHE);
+
+        const filtrado = HIST_CACHE.filter((h) => {
+          const r = h.resumo || {};
+          const base = [
+            r.op,
+            r.itemOp,
+            r.dataOp,
+            r.produto,
+            r.dn,
+            r.maquina,
+            r.turno,
+            String(r.metaTubos ?? ""),
+            String(r.tubosApontados ?? ""),
+          ]
+            .join(" ")
+            .toLowerCase();
+          return base.includes(f);
+        });
+
+        prodSetHistLista(filtrado);
+      }
+
+      function prodGetHistByKey(key) {
+        return HIST_CACHE.find((x) => x.key === key) || null;
+      }
+
+      function prodAbrirResumoHist(key) {
+        const h = prodGetHistByKey(key);
+        if (!h) return alert("Registro não encontrado no histórico.");
+
+        const r = h.resumo || {};
+        const calc = h.calcFinal || {};
+        const top = getTopDesvios(calc, 3);
+
+        document.getElementById("histModalTitulo").textContent =
+          `Resumo — OP ${r.op}/${r.itemOp} (${r.dataOp})`;
+
+        document.getElementById("histModalSub").textContent =
+          `${r.produto || ""} | DN: ${r.dn || ""} | Máquina ${r.maquina || ""} | Turno ${r.turno || ""}`;
+
+        let html = "";
+        html += `<div class="row">
+    <div class="col"><div class="mini"><b>Meta:</b> ${Number(r.metaTubos || 0)} tubos</div></div>
+    <div class="col"><div class="mini"><b>Real:</b> ${Number(r.tubosApontados || 0)} tubos</div></div>
+    <div class="col"><div class="mini"><b>Eficiência:</b> ${fmtNumBR(Number(r.eficienciaPct || 0), 2)}%</div></div>
+  </div>`;
+
+        html += `<hr class="divider" />`;
+        html += `<div style="margin-bottom:8px;"><b>Consumo por item (resumo)</b></div>`;
+        html += `<table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th class="right">kg/tubo previsto</th>
+        <th class="right">Previsto (kg)</th>
+        <th class="right">Real (kg)</th>
+        <th class="right">Saldo (kg)</th>
+        <th class="right">% Real/Prev</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+        Object.entries(calc).forEach(([item, v]) => {
+          html += `<tr>
+      <td><b>${item}</b></td>
+      <td class="right">${Number(v.kgPorTuboPrev || 0).toFixed(3)}</td>
+      <td class="right">${Number(v.previsto || 0).toFixed(3)}</td>
+      <td class="right">${Number(v.real || 0).toFixed(3)}</td>
+      <td class="right">${Number(v.saldo || 0).toFixed(3)}</td>
+      <td class="right">${Number(v.pct || 0).toFixed(2)}%</td>
+    </tr>`;
+        });
+
+        html += `</tbody></table>`;
+
+        html += `<hr class="divider" />`;
+        html += `<div style="margin-bottom:8px;"><b>Top 3 desvios (kg)</b></div>`;
+        if (!top.length) {
+          html += `<div class="muted">Sem dados.</div>`;
+        } else {
+          html +=
+            `<ul style="margin:0 0 0 18px;">` +
+            top
+              .map((t) => {
+                const sinal = t.desvioKg >= 0 ? "+" : "";
+                return `<li>${t.item}: <b>${sinal}${Number(t.desvioKg || 0).toFixed(3)}</b> kg (${sinal}${Number(t.desvioPct || 0).toFixed(2)}%)</li>`;
+              })
+              .join("") +
+            `</ul>`;
+        }
+
+        document.getElementById("histModalConteudo").innerHTML = html;
+        document.getElementById("modalHistResumo").style.display = "flex";
+      }
+
+      function prodFecharHistResumo() {
+        document.getElementById("modalHistResumo").style.display = "none";
+      }
+
+      document.addEventListener("click", (ev) => {
+        const modal = document.getElementById("modalHistResumo");
+        if (modal && modal.style.display === "flex" && ev.target === modal)
+          prodFecharHistResumo();
+      });
+
+      function prodBaixarCsvHist(key) {
+        const h = prodGetHistByKey(key);
+        if (!h) return alert("Registro não encontrado no histórico.");
+
+        const r = h.resumo || {};
+        const nome = `historico_OP_${r.op || "X"}_ITEM_${r.itemOp || "X"}_DATA_${r.dataOp || "X"}.csv`;
+        const csv = String(h.csvFinal || "");
+
+        if (!csv) return alert("Este registro não tem CSV salvo.");
+        baixarCSVTexto(nome, csv);
+      }
+
+      async function prodExcluirHist(key) {
+        const ok = confirm(
+          "Excluir este registro do histórico? (Não afeta OPs cadastradas, apenas o histórico encerrado.)",
+        );
+        if (!ok) return;
+
+        try {
+          await deleteHistorico(key);
+          await prodRecarregarEncerradas();
+        } catch (e) {
+          alert("Erro ao excluir: " + String(e?.message || e));
+        }
+      }
+      // =========================================================
+      // 2) PRODUÇÃO
+      // =========================================================
+      let sessao = null;
+      let eventos = [];
+
+      // =========================================================
+//  LIVE SYNC (PC -> Tablet) via API do servidor
+//  - PC publica sessao/eventos
+//  - Tablet puxa e renderiza
+// =========================================================
+const LIVE_ENABLED = true;
+const LIVE_POLL_MS = 3000; // tablet atualiza a cada 3s
+
+function getRole() {
+  const urlRole = new URLSearchParams(location.search).get("role");
+  if (urlRole === "pc" || urlRole === "tablet") return urlRole;
+  
+  const saved = localStorage.getItem("vetro_role");
+  if(saved === "pc" || saved === "tablet") return saved;
+
+  const small = window.matchMedia("(max-width: 900px)").matches;
+  return small ? "tablet" : "pc";
+}
+function isTabletMode(){
+  return gatRole() === "tablet";
+}
+
+function getMaquinaSelecionada() {
+  // se tiver sessão, usa ela; senão usa o select da tela abrir OP
+  return (sessao?.maquina || document.getElementById("maquinaInput")?.value || "FW1").toUpperCase();
+}
+
+function montarSnapshotLive() {
+  // tudo o que o tablet precisa pra mostrar igual ao PC
+  return {
+    sessao: sessao ? {
+      op: sessao.op,
+      itemOp: sessao.itemOp,
+      dataOp: sessao.dataOp,
+      maquina: sessao.maquina,
+      turno: sessao.turno,
+      produto: sessao.produto,
+      dn: sessao.dn,
+      metaTubos: sessao.metaTubos,
+      previstoPorTubo: sessao.previstoPorTubo,
+      inicio: sessao.inicio,
+    } : null,
+    eventos: eventos || [],
+    obsFinal: String(document.getElementById("obsFinal")?.value || ""),
+  };
+}
+
+async function publicarLive() {
+  if (!LIVE_ENABLED) return;
+  if (isTabletMode()) return;
+
+  const maq = getMaquinaSelecionada();
+  const payload = montarSnapshotLive();
+
+  try {
+    await fetch(`/api/live/${encodeURIComponent(maq)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  } catch (e) {
+    // não trava o sistema
+    console.warn("Falha ao publicar live:", e);
+  }
+}
+
+async function puxarLive() {
+  if (!LIVE_ENABLED) return;
+  if (!isTabletMode()) return; // PC não puxa
+
+  const maq = getMaquinaSelecionada();
+
+  try {
+    const r = await fetch(`/api/live/${encodeURIComponent(maq)}?ts=${Date.now()}`);
+    const j = await r.json();
+    if (!j?.ok) return;
+
+    if (!j.data || !j.data.sessao) {
+      // sem sessão ao vivo
+      return;
+    }
+
+    // aplica estado no tablet
+    sessao = j.data.sessao;
+    eventos = Array.isArray(j.data.eventos) ? j.data.eventos : [];
+
+    // garante Date nos timestamps
+    eventos.forEach((ev) => {
+      if (ev?.timestamp && !(ev.timestamp instanceof Date)) {
+        ev.timestamp = new Date(ev.timestamp);
+      }
+    });
+
+    // preenche obsFinal pra bater com PC
+    const obsEl = document.getElementById("obsFinal");
+    if (obsEl) obsEl.value = j.data.obsFinal || "";
+
+    // mostra cards/áreas
+    document.getElementById("opInfo").style.display = "block";
+    document.getElementById("receitaPrevistaCard").style.display = "block";
+    document.getElementById("apontamentoCard").style.display = "block";
+    document.getElementById("resumoCard").style.display = "block";
+    document.getElementById("graficoCard").style.display = "block";
+
+    // atualiza pílulas
+    document.getElementById("opPill").textContent = `OP ${sessao.op}`;
+    document.getElementById("itemOpPill").textContent = `Item OP: ${sessao.itemOp}`;
+    document.getElementById("dataOpPill").textContent = `Data: ${sessao.dataOp}`;
+    document.getElementById("produtoPill").textContent = sessao.produto || "(Sem produto)";
+    document.getElementById("dnPill").textContent = sessao.dn || "(Sem DN)";
+    document.getElementById("metaPill").textContent =
+      `Máquina ${sessao.maquina} | Turno ${sessao.turno} | Meta ${sessao.metaTubos} tubos`;
+
+    // atualiza select de ajuste
+    const sel = document.getElementById("ajusteItemSelect");
+    if (sel) {
+      sel.innerHTML = "";
+      Object.keys(sessao.previstoPorTubo || {}).forEach((item) => {
+        const opt = document.createElement("option");
+        opt.value = item;
+        opt.textContent = item;
+        sel.appendChild(opt);
+      });
+    }
+
+    renderTudo();
+  } catch (e) {
+    console.warn("Falha ao puxar live:", e);
+  }
+}
+
+      function setAba(aba) {
+        const padrao = document.getElementById("abaPadrao");
+        const pesagem = document.getElementById("abaPesagem");
+        const b1 = document.getElementById("tabPadrao");
+        const b2 = document.getElementById("tabPesagem");
+
+        if (aba === "padrao") {
+          padrao.style.display = "block";
+          pesagem.style.display = "none";
+          b1.classList.add("active");
+          b2.classList.remove("active");
+        } else {
+          padrao.style.display = "none";
+          pesagem.style.display = "block";
+          b2.classList.add("active");
+          b1.classList.remove("active");
+          atualizarPreviewPesagem();
+        }
+      }
+
+      function clone(obj) {
+        try {
+          return structuredClone(obj);
+        } catch {
+          return JSON.parse(JSON.stringify(obj));
+        }
+      }
+
+      async function abrirOP() {
+        const op = document.getElementById("opInput").value.trim();
+        const itemOp = document.getElementById("itemOpInput").value.trim();
+        const dataOp = document.getElementById("dataOpInput").value;
+        const maquina = document.getElementById("maquinaInput").value;
+        const turno = document.getElementById("turnoInput").value;
+
+        if (!op) return alert("Informe a OP.");
+        if (!itemOp) return alert("Informe o Item da OP.");
+        if (!dataOp) return alert("Informe a Data da OP.");
+
+        const cab = await getOPCabecalho(op, itemOp, dataOp);
+        if (!cab)
+          return alert(
+            "OP/Item/Data não encontrada no banco. Cadastre no PCP primeiro.",
+          );
+
+        const opKey = keyOP(op, itemOp, dataOp);
+        const receitas = await getReceitasByOpKey(opKey);
+        if (!receitas || receitas.length === 0)
+          return alert(
+            "Não existe receita cadastrada para essa OP/Item/Data. Cadastre/edite no PCP.",
+          );
+
+        const previstoPorTubo = {};
+        receitas.forEach((r) => {
+          previstoPorTubo[r.insumo] = Number(r.kg_por_tubo || 0);
+        });
+
+        sessao = {
+          op,
+          itemOp,
+          dataOp,
+          maquina,
+          turno,
+          produto: cab.produto,
+          dn: cab.dn,
+          metaTubos: Number(cab.meta_tubos || 0),
+          previstoPorTubo: clone(previstoPorTubo),
+          inicio: new Date(),
+        };
+
+        eventos = [];
+
+        document.getElementById("opInfo").style.display = "block";
+        document.getElementById("opPill").textContent = `OP ${sessao.op}`;
+        document.getElementById("itemOpPill").textContent =
+          `Item OP: ${sessao.itemOp}`;
+        document.getElementById("dataOpPill").textContent =
+          `Data: ${sessao.dataOp}`;
+        document.getElementById("produtoPill").textContent =
+          sessao.produto || "(Sem produto)";
+        document.getElementById("dnPill").textContent = sessao.dn || "(Sem DN)";
+        document.getElementById("metaPill").textContent =
+          `Máquina ${sessao.maquina} | Turno ${sessao.turno} | Meta ${sessao.metaTubos} tubos`;
+
+        document.getElementById("receitaPrevistaCard").style.display = "block";
+        document.getElementById("apontamentoCard").style.display = "block";
+        document.getElementById("resumoCard").style.display = "block";
+        document.getElementById("graficoCard").style.display = "block";
+
+        const sel = document.getElementById("ajusteItemSelect");
+        sel.innerHTML = "";
+        Object.keys(sessao.previstoPorTubo).forEach((item) => {
+          const opt = document.createElement("option");
+          opt.value = item;
+          opt.textContent = item;
+          sel.appendChild(opt);
+        });
+
+        setAba("padrao");
+        renderTudo();
+        atualizarPreviewPesagem();
+        await publicarLiver();
+      }
+
+      function parseNumberBR(raw) {
+        const s0 = String(raw ?? "").trim();
+        if (!s0) return null;
+        let s = s0.replace(/\s+/g, "");
+        const hasComma = s.includes(",");
+        const hasDot = s.includes(".");
+        if (hasComma && hasDot) s = s.replace(/\./g, "").replace(",", ".");
+        else if (hasComma && !hasDot) s = s.replace(",", ".");
+        const v = Number(s);
+        return Number.isFinite(v) ? v : null;
+      }
+      function getLoteValue(id) {
+  const el = document.getElementById(id);
+  return String(el?.value ?? "").trim();
+}
+
+function validarLotesObrigatorios(lotes) {
+  // obrigatórios: Resina/Tecido/Roving
+  const faltando = [];
+  if (!lotes?.Resina) faltando.push("Resina");
+  if (!lotes?.Tecido) faltando.push("Tecido");
+  if (!lotes?.Roving) faltando.push("Roving");
+  return faltando;
+}
+
+      function calcularPrevistoTotalPorItem() {
+        const out = {};
+        for (const [item, kgPorTubo] of Object.entries(
+          sessao.previstoPorTubo,
+        )) {
+          out[item] = (kgPorTubo || 0) * sessao.metaTubos;
+        }
+        return out;
+      }
+
+      function calcularTotalTubos() {
+        return eventos
+          .filter((e) => e.tipo === "PROD_PADRAO" || e.tipo === "PROD_PESAGEM")
+          .reduce((s, e) => s + e.tubos, 0);
+      }
+
+      function adicionarEventoPadrao() {
+        if (!sessao) return alert("Abra uma OP primeiro.");
+
+        const tubos = parseInt(
+          document.getElementById("tubosEventoInput").value,
+          10,
+        );
+        const obs = document.getElementById("obsEventoInput").value.trim();
+        if (!Number.isFinite(tubos) || tubos <= 0)
+          return alert("Informe a quantidade de tubos (> 0).");
+
+        const totalAtual = calcularTotalTubos();
+        if (totalAtual + tubos > sessao.metaTubos * 1.2) {
+          return alert(
+            "Quantidade excede muito a meta da OP. Verifique antes de lançar.",
+          );
+        }
+
+        const consumo = {};
+        for (const [item, kgPorTubo] of Object.entries(
+          sessao.previstoPorTubo,
+        )) {
+          consumo[item] = (kgPorTubo || 0) * tubos;
+        }
+        const lotes = {
+  Resina: getLoteValue("lote_padrao_resina"),
+  Tecido: getLoteValue("lote_padrao_tecido"),
+  Roving: getLoteValue("lote_padrao_roving"),
+  Areia: getLoteValue("lote_padrao_areia"), // só para ter rastreio da areia
+};
+
+const faltando = validarLotesObrigatorios(lotes);
+if (faltando.length) return alert("Informe o(s) lote(s): " + faltando.join(", "));
+
+        eventos.push({
+          tipo: "PROD_PADRAO",
+          timestamp: new Date(),
+          tubos,
+          consumo,
+          obs,
+          lotes,
+        });
+
+        document.getElementById("tubosEventoInput").value = "";
+        document.getElementById("obsEventoInput").value = "";
+        document.getElementById("lote_padrao_resina").value = "";
+        document.getElementById("lote_padrao_tecido").value = "";
+        document.getElementById("lote_padrao_roving").value = "";
+        document.getElementById("lote_padrao_areia").value = "";
+
+        renderTudo();
+        publicarLiver();
+      }
+
+      // ===== Pesagem =====
+      function parseNumberBR(raw) {
+        const s0 = String(raw ?? "").trim();
+        if (!s0) return null;
+        let s = s0.replace(/\s+/g, "");
+        const hasComma = s.includes(",");
+        const hasDot = s.includes(".");
+        if (hasComma && hasDot) {
+          s = s.replace(/\./g, "").replace(",", ".");
+        } else if (hasComma && !hasDot) {
+          s = s.replace(",", ".");
+        }
+        const v = Number(s);
+        return Number.isFinite(v) ? v : null;
+      }
+
+      function getNum(id) {
+        const el = document.getElementById(id);
+        if (!el) return null;
+        return parseNumberBR(el.value);
+      }
+
+      function delta(ini, fim) {
+        if (!Number.isFinite(ini) || !Number.isFinite(fim)) return null;
+        return ini - fim;
+      }
+
+      function coletarCalculoPesagem() {
+        const tubos = parseInt(
+          document.getElementById("tubosEventoPesagemInput").value,
+          10,
+        );
+
+        const res_ini = getNum("p_resina_ini");
+        const res_fim = getNum("p_resina_fim");
+        const tec_ini = getNum("p_tecido_ini");
+        const tec_fim = getNum("p_tecido_fim");
+        const pin_ini = getNum("p_pintura_ini");
+        const pin_fim = getNum("p_pintura_fim");
+        const out_ini = getNum("p_outros_ini");
+        const out_fim = getNum("p_outros_fim");
+
+        const cx1_ini = getNum("p_roving_cx1_ini");
+        const cx1_fim = getNum("p_roving_cx1_fim");
+        const fios1 = getNum("p_roving_fios1");
+
+        const cx2_ini = getNum("p_roving_cx2_ini");
+        const cx2_fim = getNum("p_roving_cx2_fim");
+        const fios2 = getNum("p_roving_fios2");
+
+        const consumo = {};
+        const kgPorTuboReal = {};
+        const pesagem = {};
+        let totalGeral = 0;
+
+        function aplicaSimples(nome, ini, fim) {
+          const d = delta(ini, fim);
+          if (d === null) return;
+          if (d < 0)
+            throw new Error(
+              `${nome}: Final maior que inicial. Verifique os pesos.`,
+            );
+          consumo[nome] = d;
+          totalGeral += d;
+          if (Number.isFinite(tubos) && tubos > 0)
+            kgPorTuboReal[nome] = d / tubos;
+          pesagem[nome] = { ini, fim, total: d };
+        }
+
+        aplicaSimples("Resina", res_ini, res_fim);
+        aplicaSimples("Tecido", tec_ini, tec_fim);
+        aplicaSimples("Pintura FW", pin_ini, pin_fim);
+        aplicaSimples("Outros", out_ini, out_fim);
+        
+        const tec_delta = delta(tec_ini, tec_fim);
+if (tec_delta !== null) {
+  if (tec_delta < 0) throw new Error("Tecido: final maior que inicial. Verifique os pesos.");
+
+  kgPorTuboReal["Tecido"] = tec_delta;
+
+
+  const t = Number.isFinite(tubos) && tubos > 0 ? tubos : 0;
+  const tec_total = tec_delta * t;
+
+  consumo["Tecido"] = tec_total;
+  totalGeral += tec_total;
+
+  pesagem["Tecido"] = { ini: tec_ini, fim: tec_fim, kg_por_tubo: tec_delta, tubos: t, total: tec_total };
+}
+
+        const roving1Ok =
+          Number.isFinite(cx1_ini) &&
+          Number.isFinite(cx1_fim) &&
+          Number.isFinite(fios1) &&
+          fios1 > 0;
+        const roving2Ok =
+          Number.isFinite(cx2_ini) &&
+          Number.isFinite(cx2_fim) &&
+          Number.isFinite(fios2) &&
+          fios2 > 0;
+
+        if (roving1Ok) {
+          const d1 = cx1_ini - cx1_fim;
+          if (d1 < 0)
+            throw new Error(
+              "Roving (Cx1): final maior que inicial. Verifique os pesos.",
+            );
+          const total1 = d1 * fios1;
+          consumo["Roving"] = (consumo["Roving"] || 0) + total1;
+          pesagem["Roving_Cx1"] = {
+            cx_ini: cx1_ini,
+            cx_fim: cx1_fim,
+            fios: fios1,
+            delta: d1,
+            total: total1,
+          };
+        }
+        if (roving2Ok) {
+          const d2 = cx2_ini - cx2_fim;
+          if (d2 < 0)
+            throw new Error(
+              "Roving (Cx2): final maior que inicial. Verifique os pesos.",
+            );
+          const total2 = d2 * fios2;
+          consumo["Roving"] = (consumo["Roving"] || 0) + total2;
+          pesagem["Roving_Cx2"] = {
+            cx_ini: cx2_ini,
+            cx_fim: cx2_fim,
+            fios: fios2,
+            delta: d2,
+            total: total2,
+          };
+        }
+        if (consumo["Roving"]) {
+          totalGeral += consumo["Roving"];
+          if (Number.isFinite(tubos) && tubos > 0)
+            kgPorTuboReal["Roving"] = consumo["Roving"] / tubos;
+        }
+
+        return { tubos, consumo, kgPorTuboReal, pesagem, totalGeral };
+      }
+
+      function atualizarPreviewPesagem() {
+        const body = document.getElementById("previaPesagemBody");
+        const hint = document.getElementById("previaHint");
+        const totalGeralEl = document.getElementById("previaTotalGeral");
+        const mediaGeralEl = document.getElementById("previaMediaGeral");
+
+        if (!body || !hint || !totalGeralEl || !mediaGeralEl) return;
+
+        try {
+          const { tubos, consumo, kgPorTuboReal, totalGeral } =
+            coletarCalculoPesagem();
+
+          body.innerHTML = "";
+          const itens = Object.entries(consumo);
+
+          if (itens.length === 0) {
+            body.innerHTML = `<tr><td class="muted" colspan="3">Sem dados ainda.</td></tr>`;
+            hint.textContent = "Preencha tubos e os pesos para ver a média.";
+            totalGeralEl.textContent = "0,000";
+            mediaGeralEl.textContent = "-";
+            return;
+          }
+
+          hint.textContent =
+            Number.isFinite(tubos) && tubos > 0
+              ? "Prévia calculada com base nos tubos informados."
+              : "Informe 'tubos produzidos' para calcular kg/tubo.";
+
+          itens.forEach(([item, total]) => {
+            const media = kgPorTuboReal[item];
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td><b>${item}</b></td>
+              <td>${Number(total).toFixed(3)}</td>
+              <td>${Number.isFinite(media) ? media.toFixed(3) : "-"}</td>
+            `;
+            body.appendChild(tr);
+          });
+
+          totalGeralEl.textContent = Number(totalGeral || 0).toFixed(3);
+          const mediaGeral =
+            Number.isFinite(tubos) && tubos > 0 ? totalGeral / tubos : null;
+          mediaGeralEl.textContent =
+            mediaGeral === null ? "-" : mediaGeral.toFixed(3);
+        } catch (err) {
+          body.innerHTML = `<tr><td class="warn" colspan="3">${String(err.message || err)}</td></tr>`;
+          hint.textContent = "Corrija os dados para exibir a prévia.";
+          totalGeralEl.textContent = "0,000";
+          mediaGeralEl.textContent = "-";
+        }
+      }
+
+      function adicionarEventoPesagem() {
+        if (!sessao) return alert("Abra uma OP primeiro.");
+
+        const obs = document
+          .getElementById("obsEventoPesagemInput")
+          .value.trim();
+
+        let calc;
+        try {
+          calc = coletarCalculoPesagem();
+        } catch (err) {
+          return alert(String(err.message || err));
+        }
+
+        const { tubos, consumo, kgPorTuboReal, pesagem } = calc;
+
+        if (!Number.isFinite(tubos) || tubos <= 0) {
+          return alert(
+            "Informe a quantidade de tubos produzidos no evento (> 0).",
+          );
+        }
+
+        const totalAtual = calcularTotalTubos();
+        if (totalAtual + tubos > sessao.metaTubos * 1.2) {
+          return alert(
+            "Quantidade excede muito a meta da OP. Verifique antes de lançar.",
+          );
+        }
+
+        const itensLancados = Object.keys(consumo).length;
+        if (itensLancados === 0) {
+          return alert(
+            "Preencha pelo menos um insumo (inicial e final) para lançar a pesagem.",
+          );
+        }
+        // ===== Lotes (PESAGEM) =====
+    const lotes = {
+  Resina: getLoteValue("lote_pesagem_resina"),
+  Tecido: getLoteValue("lote_pesagem_tecido"),
+  Roving: getLoteValue("lote_pesagem_roving"),
+  Areia: getLoteValue("lote_pesagem_areia"), // rastreio
+};
+
+const faltando = validarLotesObrigatorios(lotes);
+if (faltando.length) return alert("Informe o(s) lote(s): " + faltando.join(", "));
+        eventos.push({
+          tipo: "PROD_PESAGEM",
+          timestamp: new Date(),
+          tubos,
+          consumo,
+          kgPorTuboReal,
+          pesagem,
+          obs,
+          lotes,
+        });
+
+        document.getElementById("tubosEventoPesagemInput").value = "";
+        document.getElementById("obsEventoPesagemInput").value = "";
+
+        atualizarPreviewPesagem();
+        renderTudo();
+        publicarLiver();
+      }
+
+      // ===== Ajuste Manual =====
+      function adicionarAjusteManual() {
+        if (!sessao) return alert("Abra uma OP primeiro.");
+
+        const item = document.getElementById("ajusteItemSelect").value;
+        const kg = parseFloat(document.getElementById("ajusteKgInput").value);
+        const obs = document.getElementById("ajusteObsInput").value.trim();
+
+        if (!obs) return alert("Informe o motivo do ajuste (obrigatório).");
+        if (!Number.isFinite(kg) || kg === 0)
+          return alert("Informe um ajuste (kg) válido (diferente de 0).");
+
+        eventos.push({
+          tipo: "AJUSTE",
+          timestamp: new Date(),
+          item,
+          kg,
+          obs,
+        });
+
+        document.getElementById("ajusteKgInput").value = "";
+        document.getElementById("ajusteObsInput").value = "";
+        renderTudo();
+        publicarLiver();
+      }
+
+      function excluirEvento(idx) {
+        eventos.splice(idx, 1);
+        renderTudo();
+        publicarLiver();
+      }
+
+      function calcularRealPorItem() {
+        const real = {};
+        for (const item of Object.keys(sessao.previstoPorTubo)) real[item] = 0;
+
+        for (const e of eventos) {
+          if (e.tipo === "PROD_PADRAO" || e.tipo === "PROD_PESAGEM") {
+            for (const [item, kg] of Object.entries(e.consumo || {})) {
+              real[item] = (real[item] || 0) + (kg || 0);
+            }
+          } else if (e.tipo === "AJUSTE") {
+            real[e.item] = (real[e.item] || 0) + e.kg;
+          }
+        }
+
+        for (const k of Object.keys(real)) {
+          if (!Number.isFinite(real[k])) real[k] = 0;
+        }
+        return real;
+      }
+
+      function calcularPorItem() {
+        const previstoTotal = calcularPrevistoTotalPorItem();
+        const real = calcularRealPorItem();
+        const resultado = {};
+
+        const qtdEventosProd = eventos.filter(
+          (e) => e.tipo === "PROD_PADRAO" || e.tipo === "PROD_PESAGEM",
+        ).length;
+
+        for (const item of Object.keys(sessao.previstoPorTubo)) {
+          const p = previstoTotal[item] || 0;
+          const r = real[item] || 0;
+          const saldo = p - r;
+          const pct = p > 0 ? (r / p) * 100 : 0;
+          const mediaEvento = qtdEventosProd ? r / qtdEventosProd : 0;
+
+          resultado[item] = {
+            kgPorTuboPrev: sessao.previstoPorTubo[item] || 0,
+            previsto: p,
+            real: r,
+            saldo,
+            pct,
+            mediaEvento,
+          };
+        }
+        return resultado;
+      }
+
+      function renderReceitaPrevista() {
+        const body = document.getElementById("receitaPrevistaBody");
+        body.innerHTML = "";
+        const previstoTotal = calcularPrevistoTotalPorItem();
+
+        Object.entries(sessao.previstoPorTubo).forEach(([item, kgPt]) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><b>${item}</b></td>
+            <td>${(kgPt || 0).toFixed(3)}</td>
+            <td>${sessao.metaTubos}</td>
+            <td>${(previstoTotal[item] || 0).toFixed(3)}</td>
+          `;
+          body.appendChild(tr);
+        });
+      }
+
+      function renderTubos() {
+        const total = calcularTotalTubos();
+        document.getElementById("tubosTotalLbl").textContent = total;
+        document.getElementById("tubosSaldoLbl").textContent =
+          sessao.metaTubos - total;
+      }
+
+      function renderCardsItens(calc) {
+        const wrap = document.getElementById("cardsItens");
+        wrap.innerHTML = "";
+
+        Object.entries(calc).forEach(([item, v]) => {
+          const passou = v.pct > 105;
+          const alerta = passou ? "warn" : "ok";
+          const alertaTxt = passou
+            ? "ALERTA: real acima do previsto"
+            : "Dentro do esperado";
+
+          const div = document.createElement("div");
+          div.className = "card";
+          div.style.margin = "0";
+          div.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong>${item}</strong>
+              <span class="${alerta}" style="font-size:12px;">${alertaTxt}</span>
+            </div>
+            <div class="muted" style="margin-top:6px;">kg/tubo previsto: <b>${v.kgPorTuboPrev.toFixed(3)}</b> | Previsto: <b>${v.previsto.toFixed(3)}</b> kg</div>
+            <div class="muted">Real: <b>${v.real.toFixed(3)}</b> kg | Saldo: <b>${v.saldo.toFixed(3)}</b> kg</div>
+            <div class="muted">% Real/Prev: <b>${v.pct.toFixed(2)}%</b> | Média Real por evento: <b>${v.mediaEvento.toFixed(3)}</b> kg</div>
+          `;
+          wrap.appendChild(div);
+        });
+      }
+
+      function resumoCurtoConsumo(consumo) {
+        const pares = Object.entries(consumo || {})
+          .filter(([_, kg]) => Math.abs(kg) > 0.0001)
+          .map(([item, kg]) => `${item}: ${kg.toFixed(2)}kg`);
+
+        if (pares.length === 0) return "Sem consumo registrado";
+        if (pares.length <= 3) return pares.join(" | ");
+        return pares.slice(0, 3).join(" | ") + ` | +${pares.length - 3} itens`;
+      }
+
+      function abrirDetalhesEvento(idx) {
+        const e = eventos[idx];
+        if (!e) return;
+        
+
+        const hhmm = e.timestamp.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        const titulo =
+          e.tipo === "PROD_PESAGEM"
+            ? "Produção (PESAGEM)"
+            : e.tipo === "PROD_PADRAO"
+              ? "Produção (PADRÃO)"
+              : "Ajuste";
+
+        document.getElementById("modalTitulo").textContent =
+          `Detalhes — ${titulo}`;
+        document.getElementById("modalSubtitulo").textContent =
+          `${hhmm}${e.tubos ? " | +" + e.tubos + " tubos" : ""}${e.obs ? " | " + e.obs : ""}`;
+
+        let html = "";
+
+        if (e.tipo === "PROD_PESAGEM") {
+          if (e.pesagem?.Roving_Cx1 || e.pesagem?.Roving_Cx2) {
+            html += `<div style="margin-top:10px;"><b>Roving (detalhe por caixa):</b></div>`;
+            html += `<ul style="margin:6px 0 14px 18px;">`;
+            if (e.pesagem.Roving_Cx1) {
+              const x = e.pesagem.Roving_Cx1;
+              html += `<li>Cx1: (ini ${x.cx_ini} - fim ${x.cx_fim} = ${x.delta.toFixed(3)}) × fios ${x.fios} = <b>${x.total.toFixed(3)}</b> kg</li>`;
+            }
+            if (e.pesagem.Roving_Cx2) {
+              const x = e.pesagem.Roving_Cx2;
+              html += `<li>Cx2: (ini ${x.cx_ini} - fim ${x.cx_fim} = ${x.delta.toFixed(3)}) × fios ${x.fios} = <b>${x.total.toFixed(3)}</b> kg</li>`;
+            }
+            html += `</ul>`;
+          }
+        }
+
+        if (e.tipo === "PROD_PESAGEM" || e.tipo === "PROD_PADRAO") {
+          html += `<div style="margin:10px 0 8px 0;"><b>Previsto x Real (kg/tubo) — neste evento</b></div>`;
+          html += `<table style="width:100%; border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th style="text-align:left; border-bottom:1px solid #e8edf2; padding:8px;">Item</th>
+        <th style="text-align:right; border-bottom:1px solid #e8edf2; padding:8px;">Previsto</th>
+        <th style="text-align:right; border-bottom:1px solid #e8edf2; padding:8px;">Real</th>
+        <th style="text-align:right; border-bottom:1px solid #e8edf2; padding:8px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+          const itens = Object.keys(sessao.previstoPorTubo || {});
+          itens.forEach((it) => {
+            const prev = getPrevistoKgPorTubo(it);
+            const real = getRealKgPorTuboDoEvento(e, it);
+            const comp = linhaComparacao(prev, real);
+
+            html += `
+      <tr>
+        <td style="padding:8px; border-bottom:1px solid #f1f5f9;"><b>${it}</b></td>
+        <td style="padding:8px; border-bottom:1px solid #f1f5f9; text-align:right;">${prev.toFixed(3)}</td>
+        <td style="padding:8px; border-bottom:1px solid #f1f5f9; text-align:right;">${Number.isFinite(real) ? real.toFixed(3) : "-"}</td>
+        <td style="padding:8px; border-bottom:1px solid #f1f5f9; text-align:right;">
+          <span class="${comp.cls}">${comp.txt || "-"}</span>
+        </td>
+      </tr>`;
+          });
+
+          html += `</tbody></table>`;
+
+          html += `<div style="margin:12px 0 8px 0;"><b>Consumo total do evento (kg):</b></div>`;
+          html +=
+            `<ul style="margin:0 0 0 18px;">` +
+            Object.entries(e.consumo || {})
+              .map(
+                ([item, kg]) => `<li>${item}: <b>${kg.toFixed(3)}</b> kg</li>`,
+              )
+              .join("") +
+            `</ul>`;
+        }
+if (e.tipo === "PROD_PESAGEM" || e.tipo === "PROD_PADRAO") {
+  html += `<hr class="divider" />`;
+  html += `<div style="margin-bottom:10px;"><b>Previsto vs Real (por tubo) — neste evento</b></div>`;
+
+  const tubosEvt = Number(e.tubos || 0) || 0;
+
+  html += `<table style="width:100%; border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th style="text-align:left; border-bottom:1px solid #e8edf2; padding:8px;">Item</th>
+        <th style="text-align:left; border-bottom:1px solid #e8edf2; padding:8px;">Previsto (kg/tubo)</th>
+        <th style="text-align:left; border-bottom:1px solid #e8edf2; padding:8px;">Real (kg/tubo)</th>
+        <th style="text-align:left; border-bottom:1px solid #e8edf2; padding:8px;">Δ</th>
+      </tr>
+    </thead>
+    <tbody>
+  `;
+
+  Object.keys(sessao.previstoPorTubo || {}).forEach((item) => {
+    const prev = Number(sessao.previstoPorTubo[item] || 0);
+    const totalEvt = Number((e.consumo || {})[item] || 0);
+
+    // real kg/tubo:
+    // - se for PESAGEM e tiver kgPorTuboReal[item], usa ele
+    // - senão calcula total/tubos
+    let realPt = null;
+    if (e.tipo === "PROD_PESAGEM" && e.kgPorTuboReal && Number.isFinite(e.kgPorTuboReal[item])) {
+      realPt = Number(e.kgPorTuboReal[item]);
+    } else {
+      realPt = tubosEvt > 0 ? (totalEvt / tubosEvt) : null;
+    }
+
+    const deltaPt = realPt === null ? null : (realPt - prev);
+
+    html += `
+      <tr>
+        <td style="padding:8px; border-bottom:1px solid #f1f5f9;"><b>${item}</b></td>
+        <td style="padding:8px; border-bottom:1px solid #f1f5f9;">${prev.toFixed(3)}</td>
+        <td style="padding:8px; border-bottom:1px solid #f1f5f9;">${realPt === null ? "-" : realPt.toFixed(3)}</td>
+        <td style="padding:8px; border-bottom:1px solid #f1f5f9;">${deltaPt === null ? "-" : (deltaPt >= 0 ? "+" : "") + deltaPt.toFixed(3)}</td>
+      </tr>
+    `;
+  });
+
+  html += `</tbody></table>`;
+}
+
+        if (e.lotes) {
+  html += `<hr class="divider" />`;
+  html += `<div style="margin-bottom:10px;"><b>Lotes informados:</b></div>`;
+  html += `<ul style="margin:0 0 14px 18px;">
+    <li>Resina: <b>${e.lotes.Resina || "-"}</b></li>
+    <li>Tecido: <b>${e.lotes.Tecido || "-"}</b></li>
+    <li>Roving: <b>${e.lotes.Roving || "-"}</b></li>
+    <li>Areia (rastreio): <b>${e.lotes.Areia || "-"}</b></li>
+  </ul>`;
+}
+
+        document.getElementById("modalConteudo").innerHTML =
+          html || "Sem detalhes.";
+        document.getElementById("modalDetalhes").style.display = "flex";
+      }
+      function getPrevistoKgPorTubo(item) {
+        return Number(sessao?.previstoPorTubo?.[item] ?? 0);
+      }
+
+      function getRealKgPorTuboDoEvento(e, item) {
+        if (!e?.tubos || e.tubos <= 0) return null;
+
+        // PESAGEM: já vem calculado
+        if (e.tipo === "PROD_PESAGEM") {
+          const v = e.kgPorTuboReal?.[item];
+          return Number.isFinite(v) ? Number(v) : null;
+        }
+
+        // PADRÃO: consumo do evento / tubos
+        if (e.tipo === "PROD_PADRAO") {
+          const kg = e.consumo?.[item];
+          return Number.isFinite(kg) ? Number(kg) / e.tubos : null;
+        }
+
+        return null;
+      }
+
+      function linhaComparacao(prev, real) {
+        if (!Number.isFinite(prev) || prev <= 0 || !Number.isFinite(real))
+          return { txt: "", cls: "muted" };
+        const pct = (real / prev) * 100;
+        const passou = pct > 105;
+        return {
+          txt: `(${pct.toFixed(1)}% do previsto)`,
+          cls: passou ? "warn" : "ok",
+        };
+      }
+
+      function fecharDetalhes() {
+        document.getElementById("modalDetalhes").style.display = "none";
+      }
+
+      document.addEventListener("click", (ev) => {
+        const modal = document.getElementById("modalDetalhes");
+        if (modal && modal.style.display === "flex" && ev.target === modal)
+          fecharDetalhes();
+      });
+
+      function renderHistorico() {
+        const body = document.getElementById("historicoBody");
+        body.innerHTML = "";
+
+        eventos.forEach((e, idx) => {
+          const tr = document.createElement("tr");
+          const hhmm = e.timestamp.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+          if (e.tipo === "PROD_PADRAO" || e.tipo === "PROD_PESAGEM") {
+            const titulo =
+              e.tipo === "PROD_PESAGEM"
+                ? "PRODUÇÃO (PESAGEM)"
+                : "PRODUÇÃO (PADRÃO)";
+            const resumo = resumoCurtoConsumo(e.consumo);
+const lotTxt = e.lotes
+  ? `Lotes: Resina ${e.lotes.Resina || "-"} | Tecido ${e.lotes.Tecido || "-"} | Roving ${e.lotes.Roving || "-"} | Areia ${e.lotes.Areia || "-"}`
+  : "";
+
+            tr.innerHTML = `
+              <td>${hhmm}</td>
+              <td><b>${titulo}</b></td>
+              <td>
+                <div><b>+${e.tubos}</b> tubos</div>
+                <div class="muted" style="margin-top:6px;">${resumo}</div>
+                <div class="muted" style="margin-top:6px;">${lotTxt}</div>
+
+              </td>
+              <td>${e.obs || ""}</td>
+              <td style="white-space:nowrap;">
+                <button class="secondary" style="padding:8px 10px; border-radius:10px; margin-right:8px;" onclick="abrirDetalhesEvento(${idx})">Detalhes</button>
+                <button class="danger" style="padding:8px 10px; border-radius:10px;" onclick="excluirEvento(${idx})">Excluir</button>
+              </td>
+            `;
+          } else {
+            tr.innerHTML = `
+              <td>${hhmm}</td>
+              <td><b>AJUSTE</b></td>
+              <td><div>${e.item}: <b>${e.kg.toFixed(3)} kg</b></div></td>
+              <td>${e.obs}</td>
+              <td style="white-space:nowrap;">
+                <button class="secondary" style="padding:8px 10px; border-radius:10px; margin-right:8px;" onclick="abrirDetalhesEvento(${idx})">Detalhes</button>
+                <button class="danger" style="padding:8px 10px; border-radius:10px;" onclick="excluirEvento(${idx})">Excluir</button>
+              </td>
+            `;
+          }
+
+          body.appendChild(tr);
+        });
+      }
+
+      function renderResumo(calc) {
+        const body = document.getElementById("resumoBody");
+        body.innerHTML = "";
+
+        Object.entries(calc).forEach(([item, v]) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><b>${item}</b></td>
+            <td>${v.kgPorTuboPrev.toFixed(3)}</td>
+            <td>${v.previsto.toFixed(3)}</td>
+            <td>${v.real.toFixed(3)}</td>
+            <td>${v.saldo.toFixed(3)}</td>
+            <td>${v.pct.toFixed(2)}%</td>
+            <td>${v.mediaEvento.toFixed(3)}</td>
+          `;
+          body.appendChild(tr);
+        });
+      }
+
+      function renderTudo() {
+        if (!sessao) return;
+        renderReceitaPrevista();
+        renderTubos();
+        const calc = calcularPorItem();
+        renderCardsItens(calc);
+        renderHistorico();
+        renderResumo(calc);
+        renderGraficoResumo();
+      }
+
+      // ===== Relatório (mantido) =====
+      function fmtNumBR(n, dec = 2) {
+        const v = Number(n);
+        if (!Number.isFinite(v)) return (0).toFixed(dec).replace(".", ",");
+        return v.toFixed(dec).replace(".", ",");
+      }
+      function fmtPctBR(n, dec = 2) {
+        const v = Number(n);
+        if (!Number.isFinite(v)) return "0,00%";
+        return fmtNumBR(v, dec) + "%";
+      }
+      function fmtDataHoraBR(d) {
+        const dt = d instanceof Date ? d : new Date(d);
+        const dd = String(dt.getDate()).padStart(2, "0");
+        const mm = String(dt.getMonth() + 1).padStart(2, "0");
+        const yyyy = dt.getFullYear();
+        const hh = String(dt.getHours()).padStart(2, "0");
+        const mi = String(dt.getMinutes()).padStart(2, "0");
+        return `${dd}/${mm}/${yyyy} ${hh}:${mi}`;
+      }
+      function csvEscape(val) {
+        const s = String(val ?? "");
+        if (/[;"\n\r]/.test(s)) return `"${s.replaceAll('"', '""')}"`;
+        return s;
+      }
+      function getTopDesvios(calc, topN = 3) {
+        const arr = Object.entries(calc).map(([item, v]) => {
+          const desvioKg = (v.real || 0) - (v.previsto || 0);
+          const desvioPct = v.previsto > 0 ? (desvioKg / v.previsto) * 100 : 0;
+          return { item, ...v, desvioKg, desvioPct, abs: Math.abs(desvioKg) };
+        });
+        arr.sort((a, b) => b.abs - a.abs);
+        return arr.slice(0, topN);
+      }
+      function getEficienciaTubos(meta, apontado) {
+        const m = Number(meta) || 0;
+        const a = Number(apontado) || 0;
+        if (m <= 0) return 0;
+        return (a / m) * 100;
+      }
+
+      function copiarResumo() {
+        if (!sessao) return;
+
+        const calc = calcularPorItem();
+        const obsFinal = document.getElementById("obsFinal").value.trim();
+        const tubosTotal = calcularTotalTubos();
+        const saldoTubos = sessao.metaTubos - tubosTotal;
+        const eficiencia = getEficienciaTubos(sessao.metaTubos, tubosTotal);
+        const top = getTopDesvios(calc, 3);
+
+        let txt = "";
+        txt += `RELATÓRIO DE CONSUMO – OP ${sessao.op}\n`;
+        txt += `Item da OP: ${sessao.itemOp}\n`;
+        txt += `Data OP: ${sessao.dataOp}\n`;
+        txt += `Data/Hora: ${fmtDataHoraBR(new Date())}\n`;
+        txt += `Produto: ${sessao.produto} | DN: ${sessao.dn}\n`;
+        txt += `Máquina: ${sessao.maquina} | Turno: ${sessao.turno}\n\n`;
+
+        txt += `PRODUÇÃO (META x REAL)\n`;
+        txt += `- Meta: ${sessao.metaTubos} tubos\n`;
+        txt += `- Real apontado: ${tubosTotal} tubos\n`;
+        txt += `- Saldo: ${saldoTubos} tubos\n`;
+        txt += `- Eficiência: ${fmtPctBR(eficiencia, 2)}\n\n`;
+
+        txt += `CONSUMO POR ITEM (RESUMO)\n`;
+        txt += `Item | Previsto (kg) | Real (kg) | Saldo (kg) | % Real/Prev\n`;
+        txt += `-----------------------------------------------------------\n`;
+        Object.entries(calc).forEach(([item, v]) => {
+          txt += `${item} | ${fmtNumBR(v.previsto, 3)} | ${fmtNumBR(v.real, 3)} | ${fmtNumBR(v.saldo, 3)} | ${fmtPctBR(v.pct, 2)}\n`;
+        });
+
+        txt += `\nTOP DESVIOS (por kg)\n`;
+        if (top.length === 0) {
+          txt += `- Sem dados para desvio\n`;
+        } else {
+          top.forEach((t, i) => {
+            const sinal = t.desvioKg >= 0 ? "+" : "";
+            txt += `${i + 1}) ${t.item} | Real ${fmtNumBR(t.real, 3)}kg | Prev ${fmtNumBR(t.previsto, 3)}kg | Desvio ${sinal}${fmtNumBR(t.desvioKg, 3)}kg (${sinal}${fmtPctBR(t.desvioPct, 2)})\n`;
+          });
+        }
+
+        if (obsFinal) {
+          txt += `\nOBSERVAÇÕES FINAIS\n- ${obsFinal}\n`;
+        }
+
+        const qtdEventosProd = eventos.filter(
+          (e) => e.tipo === "PROD_PADRAO" || e.tipo === "PROD_PESAGEM",
+        ).length;
+        const qtdAjustes = eventos.filter((e) => e.tipo === "AJUSTE").length;
+        txt += `\nEVENTOS\n- Produção: ${qtdEventosProd} evento(s)\n- Ajustes: ${qtdAjustes} ajuste(s)\n`;
+
+        navigator.clipboard
+          .writeText(txt)
+          .then(() => {
+            document.getElementById("statusMsg").textContent =
+              "Relatório (resumo) copiado para a área de transferência.";
+          })
+          .catch(() =>
+            alert(
+              "Não foi possível copiar. Seu navegador pode estar bloqueando.",
+            ),
+          );
+      }
+
+      function gerarTextoRelatorio() {
+        if (!sessao) return "";
+
+        const calc = calcularPorItem();
+        const obsFinal = document.getElementById("obsFinal").value.trim();
+        const tubosTotal = calcularTotalTubos();
+        const saldoTubos = sessao.metaTubos - tubosTotal;
+
+        const eficiencia =
+          sessao.metaTubos > 0 ? (tubosTotal / sessao.metaTubos) * 100 : 0;
+
+        const fmtNum = (n, dec = 1) =>
+          Number(n || 0)
+            .toFixed(dec)
+            .replace(".", ",");
+        const fmtPct = (n, dec = 1) => fmtNum(n, dec) + "%";
+
+        let txt = "";
+        txt += `RELATÓRIO DE CONSUMO – OP ${sessao.op}\n`;
+        txt += `Item OP: ${sessao.itemOp} | Data OP: ${sessao.dataOp}\n`;
+        txt += `Produto: ${sessao.produto} | DN: ${sessao.dn}\n`;
+        txt += `Máquina: ${sessao.maquina} | Turno: ${sessao.turno}\n\n`;
+
+        txt += `PRODUÇÃO\n`;
+        txt += `- Meta: ${sessao.metaTubos} tubos\n`;
+        txt += `- Real apontado: ${tubosTotal} tubos\n`;
+        txt += `- Saldo: ${saldoTubos} tubos\n`;
+        txt += `- Eficiência: ${fmtPct(eficiencia, 1)}\n\n`;
+
+        txt += `CONSUMO POR ITEM\n`;
+        txt += `Item | Previsto (kg) | Real (kg) | Saldo (kg) | % Real/Prev\n`;
+        txt += `-----------------------------------------------------------\n`;
+
+        Object.entries(calc).forEach(([item, v]) => {
+          txt += `${item} | ${fmtNum(v.previsto, 1)} | ${fmtNum(v.real, 1)} | ${fmtNum(v.saldo, 1)} | ${fmtPct(v.pct, 1)}\n`;
+        });
+
+        if (obsFinal) txt += `\nOBSERVAÇÕES\n- ${obsFinal}\n`;
+
+        return txt;
+      }
+
+      async function compartilharResumo() {
+        if (!sessao) return;
+
+        const texto = gerarTextoRelatorio();
+        if (!texto) return alert("Sem dados para compartilhar.");
+
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: `Relatório OP ${sessao.op}`,
+              text: texto,
+            });
+            document.getElementById("statusMsg").textContent =
+              "Compartilhamento aberto.";
+            return;
+          } catch (err) {}
+        }
+
+        try {
+          await navigator.clipboard.writeText(texto);
+          document.getElementById("statusMsg").textContent =
+            "Navegador não suportou compartilhar. Copiei o relatório e vou abrir o WhatsApp.";
+        } catch (e) {
+          document.getElementById("statusMsg").textContent =
+            "Navegador não suportou compartilhar. Vou abrir WhatsApp com a mensagem.";
+        }
+
+        const url = "https://wa.me/?text=" + encodeURIComponent(texto);
+        window.open(url, "_blank");
+      }
+
+      function baixarCSV() {
+        if (!sessao) return;
+
+        const calc = calcularPorItem();
+        const obsFinal = document.getElementById("obsFinal").value.trim();
+        const tubosTotal = calcularTotalTubos();
+        const saldoTubos = sessao.metaTubos - tubosTotal;
+        const eficiencia = getEficienciaTubos(sessao.metaTubos, tubosTotal);
+
+        let csv = "";
+        csv += "RELATORIO Ordem de Produção\n";
+        csv += "Campo;Valor\n";
+        csv += `DataHora Gerado;${csvEscape(fmtDataHoraBR(new Date()))}\n`;
+        csv += `OP;${csvEscape(sessao.op)}\n`;
+        csv += `Item_OP;${csvEscape(sessao.itemOp)}\n`;
+        csv += `Data_OP;${csvEscape(sessao.dataOp)}\n`;
+        csv += `Produto;${csvEscape(sessao.produto)}\n`;
+        csv += `DN;${csvEscape(sessao.dn)}\n`;
+        csv += `Maquina;${csvEscape(sessao.maquina)}\n`;
+        csv += `Turno;${csvEscape(sessao.turno)}\n`;
+        csv += `Meta de Tubos;${csvEscape(sessao.metaTubos)}\n`;
+        csv += `Tubos Apontados;${csvEscape(tubosTotal)}\n`;
+        csv += `Tubos Saldo;${csvEscape(saldoTubos)}\n`;
+        csv += `Eficiencia_% ;${csvEscape(fmtNumBR(eficiencia, 2))}\n`;
+        if (obsFinal) csv += `Observacoes_Finais;${csvEscape(obsFinal)}\n`;
+        csv += "\n";
+
+        csv += "CONSUMO_POR_ITEM\n";
+        csv +=
+          "Item;Kg_Tubo_Previsto;Previsto_kg;Real_kg;Saldo_kg;Real_Sobre_Prev_% ;Media_Real_Por_Evento_kg\n";
+        Object.entries(calc).forEach(([item, v]) => {
+          csv +=
+            [
+              csvEscape(item),
+              csvEscape(fmtNumBR(v.kgPorTuboPrev, 3)),
+              csvEscape(fmtNumBR(v.previsto, 3)),
+              csvEscape(fmtNumBR(v.real, 3)),
+              csvEscape(fmtNumBR(v.saldo, 3)),
+              csvEscape(fmtNumBR(v.pct, 2)),
+              csvEscape(fmtNumBR(v.mediaEvento, 3)),
+            ].join(";") + "\n";
+        });
+        csv += "\n";
+
+csv += "EVENTOS\n";
+csv += "DataHora;Tipo;Tubos;Item;Kg;Obs;Detalhe;Lote_Resina;Lote_Tecido;Lote_Roving;Lote_Areia\n";
+
+        eventos.forEach((e) => {
+          const dt = fmtDataHoraBR(e.timestamp);
+
+          if (e.tipo === "PROD_PADRAO" || e.tipo === "PROD_PESAGEM") {
+            const tipo =
+              e.tipo === "PROD_PESAGEM"
+                ? "PRODUCAO_PESAGEM"
+                : "PRODUCAO_PADRAO";
+            const detalhe = resumoCurtoConsumo(e.consumo);
+
+const lr = e.lotes?.Resina || "";
+const lt = e.lotes?.Tecido || "";
+const lrv = e.lotes?.Roving || "";
+const la = e.lotes?.Areia || "";
+
+csv += [
+  csvEscape(dt),
+  csvEscape(tipo),
+  csvEscape(e.tubos),
+  "",
+  "",
+  csvEscape(e.obs || ""),
+  csvEscape(detalhe),
+  csvEscape(lr),
+  csvEscape(lt),
+  csvEscape(lrv),
+  csvEscape(la),
+].join(";") + "\n";
+
+            Object.entries(e.consumo || {}).forEach(([item, kg]) => {
+  const loteItem =
+    item === "Resina" ? (e.lotes?.Resina || "") :
+    item === "Tecido" ? (e.lotes?.Tecido || "") :
+    item === "Roving" ? (e.lotes?.Roving || "") :
+    ""; 
+
+  csv += [
+    csvEscape(dt),
+    csvEscape(tipo + "_ITEM"),
+    csvEscape(e.tubos),
+    csvEscape(item),
+    csvEscape(fmtNumBR(kg, 3)),
+    csvEscape(e.obs || ""),
+    "",
+    csvEscape(e.lotes?.Resina || ""),
+    csvEscape(e.lotes?.Tecido || ""),
+    csvEscape(e.lotes?.Roving || ""),
+    csvEscape(e.lotes?.Areia || ""),
+  ].join(";") + "\n";
+});
+          } else if (e.tipo === "AJUSTE") {
+            csv +=
+              [
+                csvEscape(dt),
+                csvEscape("AJUSTE"),
+                "",
+                csvEscape(e.item),
+                csvEscape(fmtNumBR(e.kg, 3)),
+                csvEscape(e.obs || ""),
+                "",
+              ].join(";") + "\n";
+          }
+        });
+
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `relatorio_OP_${sessao.op}_ITEM_${sessao.itemOp}_DATA_${sessao.dataOp}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        document.getElementById("statusMsg").textContent =
+          "Relatório gerado e baixado.";
+      }
+
+      async function encerrarOP() {
+        if (!sessao) return;
+        const ok = confirm(
+          "Encerrar OP?\n\nIsso vai:\n- Salvar no Histórico (Banco interno)\n- Gerar um CSV final\n- Limpar a sessão atual",
+        );
+        if (!ok) return;
+
+        // 1) gera CSV final
+        const calc = calcularPorItem();
+        const obsFinal = document.getElementById("obsFinal").value.trim();
+        const tubosTotal = calcularTotalTubos();
+        const saldoTubos = sessao.metaTubos - tubosTotal;
+        const eficiencia = getEficienciaTubos(sessao.metaTubos, tubosTotal);
+
+        let csv = "";
+        csv += "RELATORIO Ordem de Produção (ENCERRAMENTO)\n";
+        csv += "Campo;Valor\n";
+        csv += `DataHora Encerrado;${csvEscape(fmtDataHoraBR(new Date()))}\n`;
+        csv += `OP;${csvEscape(sessao.op)}\n`;
+        csv += `Item_OP;${csvEscape(sessao.itemOp)}\n`;
+        csv += `Data_OP;${csvEscape(sessao.dataOp)}\n`;
+        csv += `Produto;${csvEscape(sessao.produto)}\n`;
+        csv += `DN;${csvEscape(sessao.dn)}\n`;
+        csv += `Maquina;${csvEscape(sessao.maquina)}\n`;
+        csv += `Turno;${csvEscape(sessao.turno)}\n`;
+        csv += `Meta de Tubos;${csvEscape(sessao.metaTubos)}\n`;
+        csv += `Tubos Apontados;${csvEscape(tubosTotal)}\n`;
+        csv += `Tubos Saldo;${csvEscape(saldoTubos)}\n`;
+        csv += `Eficiencia_% ;${csvEscape(fmtNumBR(eficiencia, 2))}\n`;
+        if (obsFinal) csv += `Observacoes_Finais;${csvEscape(obsFinal)}\n`;
+        csv += "\n";
+
+csv += "CONSUMO_POR_ITEM\n";
+csv += "Item;Kg_Tubo_Prev;Kg_Tubo_Real;Previsto_OP_kg;Previsto_Ajust_kg;Real_kg;Saldo_vs_OP_kg;Saldo_vs_Ajust_kg;Real_sobre_OP_% ;Real_sobre_Ajust_% ;Media_Real_Por_Evento_kg\n";
+
+Object.entries(calc).forEach(([item, v]) => {
+  csv +=
+    [
+      csvEscape(item),
+      csvEscape(fmtNumBR(v.kgPorTuboPrev, 3)),
+      csvEscape(fmtNumBR(v.kgTuboReal, 3)),
+      csvEscape(fmtNumBR(v.previstoOP, 3)),
+      csvEscape(fmtNumBR(v.previstoAjust, 3)),
+      csvEscape(fmtNumBR(v.real, 3)),
+      csvEscape(fmtNumBR(v.saldoVsOP, 3)),
+      csvEscape(fmtNumBR(v.saldoVsAjust, 3)),
+      csvEscape(fmtNumBR(v.pctVsOP, 2)),
+      csvEscape(fmtNumBR(v.pctVsAjust, 2)),
+      csvEscape(fmtNumBR(v.mediaEvento, 3)),
+    ].join(";") + "\n";
+});
+        csv += "\n";
+
+        csv += "EVENTOS\n";
+        csv += "DataHora;Tipo;Tubos;Item;Kg;Obs;Detalhe\n";
+        eventos.forEach((e) => {
+          const dt = fmtDataHoraBR(e.timestamp);
+          if (e.tipo === "PROD_PADRAO" || e.tipo === "PROD_PESAGEM") {
+            const tipo =
+              e.tipo === "PROD_PESAGEM"
+                ? "PRODUCAO_PESAGEM"
+                : "PRODUCAO_PADRAO";
+            const detalhe = resumoCurtoConsumo(e.consumo);
+            csv +=
+              [
+                csvEscape(dt),
+                csvEscape(tipo),
+                csvEscape(e.tubos),
+                "",
+                "",
+                csvEscape(e.obs || ""),
+                csvEscape(detalhe),
+              ].join(";") + "\n";
+            Object.entries(e.consumo || {}).forEach(([it, kg]) => {
+              csv +=
+                [
+                  csvEscape(dt),
+                  csvEscape(tipo + "_ITEM"),
+                  csvEscape(e.tubos),
+                  csvEscape(it),
+                  csvEscape(fmtNumBR(kg, 3)),
+                  csvEscape(e.obs || ""),
+                  "",
+                ].join(";") + "\n";
+            });
+          } else if (e.tipo === "AJUSTE") {
+            csv +=
+              [
+                csvEscape(dt),
+                csvEscape("AJUSTE"),
+                "",
+                csvEscape(e.item),
+                csvEscape(fmtNumBR(e.kg, 3)),
+                csvEscape(e.obs || ""),
+                "",
+              ].join(";") + "\n";
+          }
+        });
+
+        // 2) salva no histórico do banco
+        const encerradaEm = Date.now();
+        const opKey = keyOP(sessao.op, sessao.itemOp, sessao.dataOp);
+
+        const hist = {
+          key: keyHist(opKey, encerradaEm),
+          opKey,
+          encerradaEm,
+          resumo: {
+            op: sessao.op,
+            itemOp: sessao.itemOp,
+            dataOp: sessao.dataOp,
+            produto: sessao.produto,
+            dn: sessao.dn,
+            maquina: sessao.maquina,
+            turno: sessao.turno,
+            metaTubos: sessao.metaTubos,
+            tubosApontados: tubosTotal,
+            eficienciaPct: eficiencia,
+          },
+          calcFinal: calc,
+          eventos: clone(eventos),
+          csvFinal: csv,
+        };
+
+        try {
+          await putHistoricoOP(hist);
+        } catch (e) {
+          alert(
+            "Não consegui salvar no histórico do banco. Vou baixar o CSV mesmo assim.\n\n" +
+              (e?.message || e),
+          );
+        }
+
+        // 3) baixa o CSV final (arquivo histórico)
+        baixarCSVTexto(
+          `historico_OP_${sessao.op}_ITEM_${sessao.itemOp}_DATA_${sessao.dataOp}.csv`,
+          csv,
+        );
+
+        // 4) limpa sessão
+        resetarTudo();
+      }
+        
+
+      // =========================================================
+      // 3) PCP (Cadastro/Receita/Lista + Programação)
+      // =========================================================
+      const INSUMOS_PADRAO = [
+        "Resina",
+        "Roving",
+        "Tecido",
+        "Pintura FW",
+        "Outros",
+      ];
+      let pcpModoEdicaoAtivo = false;
+
+      function pcpSetStatus(msg, isWarn = false) {
+        const el = document.getElementById("pcpStatus");
+        if (el) {
+          el.textContent = msg;
+          el.className = isWarn ? "warn" : "muted";
+        }
+      }
+      function pcpSetStatusReceita(msg, isWarn = false) {
+        const el = document.getElementById("pcpReceitaStatus");
+        if (el) {
+          el.textContent = msg;
+          el.className = isWarn ? "warn" : "muted";
+        }
+      }
+
+      function pcpSetModoEdicao(ativo) {
+        pcpModoEdicaoAtivo = !!ativo;
+        const pill = document.getElementById("pcpModoEdicao");
+        const hint = document.getElementById("pcpEdicaoHint");
+        if (pill) pill.style.display = ativo ? "inline-block" : "none";
+        if (hint) hint.style.display = ativo ? "inline-block" : "none";
+      }
+
+      function pcpLimparFormulario() {
+        document.getElementById("pcp_op").value = "";
+        document.getElementById("pcp_item").value = "";
+        document.getElementById("pcp_data").value = "";
+        document.getElementById("pcp_turno").value = "T1";
+        document.getElementById("pcp_meta").value = "";
+        document.getElementById("pcp_dn").value = "";
+        document.getElementById("pcp_produto").value = "";
+
+        document.getElementById("pcp_rec_op").value = "";
+        document.getElementById("pcp_rec_item").value = "";
+        document.getElementById("pcp_rec_data").value = "";
+
+        pcpInitTabelaReceitaPadrao();
+        pcpSetStatus("");
+        pcpSetStatusReceita("");
+        pcpSetModoEdicao(false);
+      }
+
+      function pcpInitTabelaReceitaPadrao() {
+        const body = document.getElementById("pcpReceitaBody");
+        body.innerHTML = "";
+        INSUMOS_PADRAO.forEach((ins) => pcpAddRow(ins, ""));
+      }
+
+      function pcpAddRow(insumo, valor) {
+        const body = document.getElementById("pcpReceitaBody");
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><input value="${String(insumo || "")}" placeholder="Nome do insumo" /></td>
+          <td class="right"><input value="${String(valor ?? "")}" placeholder="Ex.: 12,756" /></td>
+          <td class="right">
+            <button class="danger" style="width:auto; padding:8px 10px; border-radius:10px;" onclick="pcpExcluirLinha(this)">Excluir</button>
+          </td>
+        `;
+        body.appendChild(tr);
+      }
+      function pcpExcluirLinha(btn) {
+        const tr = btn.closest("tr");
+        if (tr) tr.remove();
+      }
+      function pcpAdicionarLinhaInsumo() {
+        pcpAddRow("", "");
+      }
+
+      async function pcpSalvarOP() {
+        const op = document.getElementById("pcp_op").value.trim();
+        const item = document.getElementById("pcp_item").value.trim();
+        const data = document.getElementById("pcp_data").value;
+        const turno = document.getElementById("pcp_turno").value;
+        const meta = parseInt(document.getElementById("pcp_meta").value, 10);
+        const dn = document.getElementById("pcp_dn").value.trim();
+        const produto = document.getElementById("pcp_produto").value.trim();
+
+        if (!op || !item || !data)
+          return pcpSetStatus("Informe OP, Item e Data.", true);
+        if (!turno) return pcpSetStatus("Informe o Turno.", true);
+        if (!Number.isFinite(meta) || meta <= 0)
+          return pcpSetStatus("Informe uma meta válida (> 0).", true);
+
+        await putOPCabecalho({
+          op_id: op,
+          item_op: item,
+          data,
+          turno,
+          produto,
+          dn,
+          meta_tubos: meta,
+        });
+
+        pcpSetStatus(
+          `OP salva/atualizada: ${op}/${item}/${data} | Turno ${turno}`,
+        );
+        pcpSetModoEdicao(true);
+        pcpRecarregarListaOPs();
+      }
+
+      function pcpCarregarParaReceita() {
+        const op = document.getElementById("pcp_op").value.trim();
+        const item = document.getElementById("pcp_item").value.trim();
+        const data = document.getElementById("pcp_data").value;
+        if (!op || !item || !data)
+          return pcpSetStatus(
+            "Preencha OP/Item/Data acima e tente novamente.",
+            true,
+          );
+
+        document.getElementById("pcp_rec_op").value = op;
+        document.getElementById("pcp_rec_item").value = item;
+        document.getElementById("pcp_rec_data").value = data;
+
+        pcpInitTabelaReceitaPadrao();
+        pcpSetStatusReceita(
+          "Chave carregada. Agora preencha os kg/tubo e salve a receita.",
+        );
+      }
+
+      async function pcpCarregarReceitaExistente() {
+        const op = document.getElementById("pcp_rec_op").value.trim();
+        const item = document.getElementById("pcp_rec_item").value.trim();
+        const data = document.getElementById("pcp_rec_data").value;
+
+        if (!op || !item || !data)
+          return pcpSetStatusReceita(
+            "Informe OP/Item/Data no bloco da receita.",
+            true,
+          );
+
+        const cab = await getOPCabecalho(op, item, data);
+        if (!cab)
+          return pcpSetStatusReceita(
+            "Cabeçalho da OP não encontrado. Cadastre OP primeiro.",
+            true,
+          );
+
+        const opKey = keyOP(op, item, data);
+        const linhas = await getReceitasByOpKey(opKey);
+
+        const body = document.getElementById("pcpReceitaBody");
+        body.innerHTML = "";
+
+        if (!linhas || linhas.length === 0) {
+          INSUMOS_PADRAO.forEach((ins) => pcpAddRow(ins, ""));
+          pcpSetStatusReceita("Nenhuma receita encontrada. Preencha e salve.");
+          return;
+        }
+
+        linhas.sort((a, b) => {
+          const pa = INSUMOS_PADRAO.includes(a.insumo) ? 0 : 1;
+          const pb = INSUMOS_PADRAO.includes(b.insumo) ? 0 : 1;
+          return pa - pb || String(a.insumo).localeCompare(String(b.insumo));
+        });
+
+        linhas.forEach((r) =>
+          pcpAddRow(r.insumo, String(r.kg_por_tubo).replace(".", ",")),
+        );
+        pcpSetStatusReceita(`Receita carregada (${linhas.length} item(ns)).`);
+      }
+
+      async function pcpSalvarReceita() {
+        const op = document.getElementById("pcp_rec_op").value.trim();
+        const item = document.getElementById("pcp_rec_item").value.trim();
+        const data = document.getElementById("pcp_rec_data").value;
+
+        if (!op || !item || !data)
+          return pcpSetStatusReceita("Informe OP/Item/Data.", true);
+
+        const cab = await getOPCabecalho(op, item, data);
+        if (!cab)
+          return pcpSetStatusReceita(
+            "Cabeçalho da OP não existe. Cadastre OP primeiro.",
+            true,
+          );
+
+        const body = document.getElementById("pcpReceitaBody");
+        const rows = Array.from(body.querySelectorAll("tr"));
+
+        const linhas = [];
+        for (const tr of rows) {
+          const inputs = tr.querySelectorAll("input");
+          const insumo = String(inputs[0].value || "").trim();
+          const valRaw = String(inputs[1].value || "").trim();
+          if (!insumo) continue;
+
+          const kg = parseNumberBR(valRaw);
+          if (!Number.isFinite(kg) || kg < 0)
+            return pcpSetStatusReceita(
+              `Valor inválido para "${insumo}".`,
+              true,
+            );
+
+          linhas.push({ insumo, kg_por_tubo: kg });
+        }
+
+        if (linhas.length === 0)
+          return pcpSetStatusReceita("Informe pelo menos 1 insumo.", true);
+
+        const opKey = keyOP(op, item, data);
+        await deleteReceitasByOpKey(opKey);
+        for (const l of linhas)
+          await putReceitaLinha({
+            op_id: op,
+            item_op: item,
+            data,
+            insumo: l.insumo,
+            kg_por_tubo: l.kg_por_tubo,
+          });
+
+        pcpSetStatusReceita(
+          `Receita salva/atualizada (${linhas.length} item(ns)).`,
+        );
+        pcpSetModoEdicao(true);
+        pcpRecarregarListaOPs();
+      }
+
+      async function pcpEditarOP(op, item, data) {
+        pcpAbrirBloco("cadastro");
+        pcpSetModoEdicao(true);
+
+        const cab = await getOPCabecalho(op, item, data);
+        if (!cab) return pcpSetStatus("OP não encontrada para editar.", true);
+
+        document.getElementById("pcp_op").value = cab.op_id;
+        document.getElementById("pcp_item").value = cab.item_op;
+        document.getElementById("pcp_data").value = cab.data;
+        document.getElementById("pcp_turno").value = cab.turno || "T1";
+        document.getElementById("pcp_meta").value = cab.meta_tubos;
+        document.getElementById("pcp_dn").value = cab.dn || "";
+        document.getElementById("pcp_produto").value = cab.produto || "";
+
+        document.getElementById("pcp_rec_op").value = cab.op_id;
+        document.getElementById("pcp_rec_item").value = cab.item_op;
+        document.getElementById("pcp_rec_data").value = cab.data;
+
+        await pcpCarregarReceitaExistente();
+        pcpSetStatus(
+          `OP carregada para edição: ${cab.op_id}/${cab.item_op}/${cab.data} | Turno ${cab.turno || "T1"}`,
+        );
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      async function pcpRecarregarListaOPs() {
+        const body = document.getElementById("pcpListaOpsBody");
+        if (!body) return;
+
+        const ops = await listAllOPs();
+        if (!ops || ops.length === 0) {
+          body.innerHTML = `<tr><td class="muted" colspan="5">Nenhuma OP cadastrada ainda.</td></tr>`;
+          return;
+        }
+
+        body.innerHTML = "";
+        ops.forEach((o) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><b>${o.op_id}/${o.item_op}/${o.data}</b></td>
+            <td>${o.produto || ""}</td>
+            <td>${o.turno || "-"}</td>
+            <td class="right">${Number(o.meta_tubos || 0)}</td>
+            <td class="right" style="white-space:nowrap;">
+              <button class="ghost" style="width:auto; padding:8px 10px; border-radius:10px; margin-right:8px;" onclick="pcpEditarOP('${o.op_id}','${o.item_op}','${o.data}')">Editar</button>
+              <button class="ghost" style="width:auto; padding:8px 10px; border-radius:10px; margin-right:8px;" onclick="pcpUsarNaProducao('${o.op_id}','${o.item_op}','${o.data}')">Abrir na Produção</button>
+              <button class="danger" style="width:auto; padding:8px 10px; border-radius:10px;" onclick="pcpExcluirOP('${o.key}')">Excluir</button>
+            </td>
+          `;
+          body.appendChild(tr);
+        });
+      }
+
+      async function pcpExcluirOP(opKey) {
+        const ok = confirm(
+          "Excluir esta OP do banco interno? (Também remove a receita)",
+        );
+        if (!ok) return;
+        await deleteOPCabecalho(opKey);
+        await deleteReceitasByOpKey(opKey);
+        pcpSetStatus("OP excluída.");
+        pcpSetStatusReceita("");
+        pcpSetModoEdicao(false);
+        pcpRecarregarListaOPs();
+      }
+
+      // Abrir na produção puxando TURNO cadastrado
+      async function pcpUsarNaProducao(op, item, data) {
+        document.getElementById("opInput").value = op;
+        document.getElementById("itemOpInput").value = item;
+        document.getElementById("dataOpInput").value = data;
+
+        const cab = await getOPCabecalho(op, item, data);
+        if (cab?.turno) document.getElementById("turnoInput").value = cab.turno;
+
+        irPara("producao");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // =========================================================
+      // 4) PROGRAMAÇÃO (PCP) — com TURNO
+      // =========================================================
+      function progSetStatus(msg, isWarn = false) {
+        const el = document.getElementById("progStatus");
+        if (el) {
+          el.textContent = msg;
+          el.className = isWarn ? "warn" : "muted";
+        }
+      }
+
+      function progLimparCampos() {
+        document.getElementById("prog_data").value = "";
+        document.getElementById("prog_turno").value = "T1";
+        document.getElementById("prog_op").value = "";
+        document.getElementById("prog_item").value = "";
+        document.getElementById("prog_meta").value = "";
+        document.getElementById("prog_dn").value = "";
+        document.getElementById("prog_produto").value = "";
+        progSetStatus("");
+      }
+
+      async function progAdicionar() {
+        const data = document.getElementById("prog_data").value;
+        const turno = document.getElementById("prog_turno").value;
+        const op = document.getElementById("prog_op").value.trim();
+        const item = document.getElementById("prog_item").value.trim();
+        const meta = parseInt(document.getElementById("prog_meta").value, 10);
+        const dn = document.getElementById("prog_dn").value.trim();
+        const produto = document.getElementById("prog_produto").value.trim();
+
+        if (!data) return progSetStatus("Informe a data da programação.", true);
+        if (!turno) return progSetStatus("Informe o turno.", true);
+        if (!op || !item) return progSetStatus("Informe OP e Item.", true);
+        if (!Number.isFinite(meta) || meta <= 0)
+          return progSetStatus("Informe uma meta válida (>0).", true);
+
+        await putProg({
+          data,
+          turno,
+          op_id: op,
+          item_op: item,
+          produto,
+          dn,
+          meta_tubos: meta,
+        });
+        await putOPCabecalho({
+          op_id: op,
+          item_op: item,
+          data,
+          turno,
+          produto,
+          dn,
+          meta_tubos: meta,
+        });
+
+        progSetStatus(
+          `Programado e OP cadastrada/atualizada: ${data} | ${turno} | ${op}/${item}`,
+        );
+        pcpRecarregarListaOPs();
+        progRecarregar();
+      }
+
+      async function progExcluir(chave) {
+        const ok = confirm("Excluir item da programação?");
+        if (!ok) return;
+        await deleteProg(chave);
+        progRecarregar();
+      }
+
+      async function progRecarregar() {
+        const body = document.getElementById("progListaBody");
+        if (!body) return;
+
+        const filtro = document.getElementById("prog_filtro_data")?.value || "";
+        const itens = await listProg(filtro);
+
+        if (!itens || itens.length === 0) {
+          body.innerHTML = `<tr><td class="muted" colspan="6">Nenhum item na programação (para este filtro).</td></tr>`;
+          return;
+        }
+
+        body.innerHTML = "";
+        itens.forEach((p) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><b>${p.data}</b></td>
+            <td>${p.turno || "-"}</td>
+            <td>${p.op_id}/${p.item_op}</td>
+            <td>${p.produto || ""}</td>
+            <td class="right">${Number(p.meta_tubos || 0)}</td>
+            <td class="right" style="white-space:nowrap;">
+              <button class="ghost" style="width:auto; padding:8px 10px; border-radius:10px; margin-right:8px;"
+                onclick="pcpEditarOP('${p.op_id}','${p.item_op}','${p.data}')">Editar OP</button>
+              <button class="danger" style="width:auto; padding:8px 10px; border-radius:10px;" onclick="progExcluir('${p.key}')">Excluir</button>
+            </td>
+          `;
+          body.appendChild(tr);
+        });
+      }
+
+      // =========================================================
+      // 5) BACKUP/RESTORE (JSON)
+      // =========================================================
+      async function exportarBackupJSON() {
+        const ops = await listAllOPs();
+        const receitasAll = [];
+        for (const o of ops) {
+          const linhas = await getReceitasByOpKey(o.key);
+          linhas.forEach((x) => receitasAll.push(x));
+        }
+        const progAll = await listProg("");
+
+        const payload = {
+          exportedAt: new Date().toISOString(),
+          db: DB_NAME,
+          version: DB_VERSION,
+          OPS: ops,
+          RECEITAS: receitasAll,
+          PROGRAMACAO: progAll,
+        };
+
+        const blob = new Blob([JSON.stringify(payload, null, 2)], {
+          type: "application/json;charset=utf-8",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `backup_vetrodb_${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        pcpSetStatus("Backup exportado (JSON).");
+      }
+
+      async function importarBackupJSON(event) {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const ok = confirm(
+          "Importar backup vai SOBRESCREVER/atualizar os registros existentes no banco interno. Continuar?",
+        );
+        if (!ok) {
+          event.target.value = "";
+          return;
+        }
+
+        const txt = await file.text();
+        let data;
+        try {
+          data = JSON.parse(txt);
+        } catch {
+          alert("JSON inválido.");
+          event.target.value = "";
+          return;
+        }
+
+        const ops = Array.isArray(data.OPS) ? data.OPS : [];
+        const recs = Array.isArray(data.RECEITAS) ? data.RECEITAS : [];
+        const progs = Array.isArray(data.PROGRAMACAO) ? data.PROGRAMACAO : [];
+
+        for (const o of ops) {
+          if (!o?.op_id || !o?.item_op || !o?.data) continue;
+          await putOPCabecalho({
+            op_id: o.op_id,
+            item_op: o.item_op,
+            data: o.data,
+            turno: o.turno || "",
+            produto: o.produto || "",
+            dn: o.dn || "",
+            meta_tubos: o.meta_tubos || 0,
+          });
+        }
+
+        for (const r of recs) {
+          if (!r?.op_id || !r?.item_op || !r?.data || !r?.insumo) continue;
+          await putReceitaLinha({
+            op_id: r.op_id,
+            item_op: r.item_op,
+            data: r.data,
+            insumo: r.insumo,
+            kg_por_tubo: r.kg_por_tubo,
+          });
+        }
+
+        for (const p of progs) {
+          if (!p?.data || !p?.op_id || !p?.item_op) continue;
+          await putProg({
+            data: p.data,
+            turno: p.turno || "",
+            op_id: p.op_id,
+            item_op: p.item_op,
+            produto: p.produto || "",
+            dn: p.dn || "",
+            meta_tubos: p.meta_tubos || 0,
+          });
+        }
+
+        pcpSetStatus("Backup importado com sucesso.");
+        pcpRecarregarListaOPs();
+        progRecarregar();
+        event.target.value = "";
+      }
+
+      // =========================================================
+      // 6) GRÁFICO
+      // =========================================================
+      function renderGraficoResumo() {
+        if (!sessao) return;
+
+        const canvas = document.getElementById("grafResumo");
+        if (!canvas) return;
+
+        const ctx = canvas.getContext("2d");
+        const calc = calcularPorItem();
+
+        const cssW = canvas.getBoundingClientRect().width;
+        const cssH = canvas.getBoundingClientRect().height;
+        canvas.width = Math.max(320, Math.floor(cssW));
+        canvas.height = Math.max(220, Math.floor(cssH));
+
+        const mostrarSaldo =
+          document.getElementById("grafMostrarSaldo")?.checked ?? true;
+
+        const itens = Object.entries(calc).map(([item, v]) => ({
+          item,
+          previsto: Number(v.previsto || 0),
+          real: Number(v.real || 0),
+          saldo: Number(v.saldo || 0),
+        }));
+
+        const temAlgo = itens.some(
+          (x) => x.previsto > 0 || x.real > 0 || Math.abs(x.saldo) > 0,
+        );
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (!temAlgo) {
+          ctx.font = "14px Arial";
+          ctx.fillStyle = "#666";
+          ctx.fillText("Sem dados para exibir no gráfico ainda.", 14, 28);
+          return;
+        }
+
+        const maxV = Math.max(
+          ...itens.map((x) =>
+            Math.max(x.previsto, x.real, mostrarSaldo ? Math.abs(x.saldo) : 0),
+          ),
+        );
+        const maxY = maxV * 1.15;
+
+        const padL = 56,
+          padR = 18,
+          padT = 18,
+          padB = 54;
+        const W = canvas.width,
+          H = canvas.height;
+        const plotW = W - padL - padR;
+        const plotH = H - padT - padB;
+
+        const yToPx = (v) => padT + (plotH - (v / maxY) * plotH);
+        const zeroY = yToPx(0);
+
+        ctx.strokeStyle = "#e8edf2";
+        ctx.lineWidth = 1;
+
+        for (let i = 0; i <= 4; i++) {
+          const y = padT + (plotH * i) / 4;
+          ctx.beginPath();
+          ctx.moveTo(padL, y);
+          ctx.lineTo(W - padR, y);
+          ctx.stroke();
+        }
+
+        ctx.fillStyle = "#666";
+        ctx.font = "12px Arial";
+        for (let i = 0; i <= 4; i++) {
+          const v = (maxY * (4 - i)) / 4;
+          const y = padT + (plotH * i) / 4;
+          ctx.fillText(v.toFixed(0) + " kg", 10, y + 4);
+        }
+
+        const n = itens.length;
+        const groupW = plotW / n;
+        const barW = Math.min(32, groupW * 0.22);
+        const gap = Math.max(8, groupW * 0.08);
+
+        itens.forEach((x, i) => {
+          const cx = padL + groupW * i + groupW / 2;
+
+          const xPrev = cx - (barW + gap / 2);
+          const yPrev = yToPx(x.previsto);
+          ctx.fillStyle = "#1f6feb";
+          ctx.fillRect(xPrev, yPrev, barW, zeroY - yPrev);
+
+          const xReal = cx + gap / 2;
+          const yReal = yToPx(x.real);
+          ctx.fillStyle = "#2f3b46";
+          ctx.fillRect(xReal, yReal, barW, zeroY - yReal);
+
+          if (mostrarSaldo) {
+            const absSaldo = Math.abs(x.saldo);
+            const xS = cx - 4;
+            const yS = yToPx(absSaldo);
+            ctx.fillStyle = x.saldo >= 0 ? "#1b7f2a" : "#c62828";
+            ctx.fillRect(xS, yS, 8, zeroY - yS);
+          }
+
+          ctx.fillStyle = "#374151";
+          ctx.font = "12px Arial";
+          const label = x.item;
+          const maxChars = Math.max(8, Math.floor(groupW / 7));
+          const line1 =
+            label.length > maxChars ? label.slice(0, maxChars) : label;
+          const line2 =
+            label.length > maxChars ? label.slice(maxChars, maxChars * 2) : "";
+          ctx.textAlign = "center";
+          ctx.fillText(line1, cx, H - 28);
+          if (line2) ctx.fillText(line2, cx, H - 14);
+
+          ctx.font = "11px Arial";
+          ctx.fillStyle = "#233";
+          ctx.fillText(x.real.toFixed(0), cx + gap / 2 + barW / 2, yReal - 6);
+        });
+
+        ctx.textAlign = "left";
+        ctx.font = "12px Arial";
+        const lx = padL,
+          ly = padT + 12;
+
+        ctx.fillStyle = "#1f6feb";
+        ctx.fillRect(lx, ly, 10, 10);
+        ctx.fillStyle = "#374151";
+        ctx.fillText("Previsto", lx + 14, ly + 10);
+
+        ctx.fillStyle = "#2f3b46";
+        ctx.fillRect(lx + 80, ly, 10, 10);
+        ctx.fillStyle = "#374151";
+        ctx.fillText("Real", lx + 94, ly + 10);
+
+        if (mostrarSaldo) {
+          ctx.fillStyle = "#1b7f2a";
+          ctx.fillRect(lx + 140, ly, 10, 10);
+          ctx.fillStyle = "#374151";
+          ctx.fillText("Saldo (abs)", lx + 154, ly + 10);
+        }
+      }
+
+      // =========================================================
+      // INIT
+      // =========================================================
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        esconderTodasTelas();
+        document.getElementById("telaMenu").style.display = "block";
+        setDbStatus("Inicializando…");
+
+        try {
+          await abrirBanco();
+          pcpInitTabelaReceitaPadrao();
+          pcpRecarregarListaOPs();
+          progRecarregar();
+        } catch (e) {
+          setDbStatus("ERRO (sem BD)");
+          alert("Falha ao iniciar banco interno (IndexedDB).");
+        }
+        if(isTabletMode()){
+          setInterval(puxarLive, LIVE_POLL_MS);
+          puxarLive();
+        }
+      });
+
+
+    </script>
+  </body>
+</html>
