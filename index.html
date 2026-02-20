@@ -2488,22 +2488,6 @@ if (faltando.length) return alert("Informe o(s) lote(s): " + faltando.join(", ")
         renderTudo();
       }
 
-      // ===== Pesagem =====
-      function parseNumberBR(raw) {
-        const s0 = String(raw ?? "").trim();
-        if (!s0) return null;
-        let s = s0.replace(/\s+/g, "");
-        const hasComma = s.includes(",");
-        const hasDot = s.includes(".");
-        if (hasComma && hasDot) {
-          s = s.replace(/\./g, "").replace(",", ".");
-        } else if (hasComma && !hasDot) {
-          s = s.replace(",", ".");
-        }
-        const v = Number(s);
-        return Number.isFinite(v) ? v : null;
-      }
-
       function getNum(id) {
         const el = document.getElementById(id);
         if (!el) return null;
@@ -4277,7 +4261,7 @@ Object.entries(calc).forEach(([item, v]) => {
         }
       });
 
-      // ===============================
+// ===============================
 // EXPOR FUNÇÕES PARA O HTML
 // ===============================
 
