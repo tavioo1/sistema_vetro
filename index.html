@@ -768,7 +768,9 @@
             <div class="col">
               <label>Observações finais</label>
               <textarea
-                id="obsFinal" rows="3" oninput="publicarLiver();" placeholder="Anotar desvios, ocorrências, etc."
+                id="obsFinal"
+                rows="3"
+                placeholder="Anotar desvios, ocorrências, etc."
               ></textarea>
             </div>
           </div>
@@ -1592,7 +1594,45 @@
       </div>
     </div>
 <!-- @COPYRIGHT CODE BY TAVIOO -->
-    <script type="module" src="app.js">
+    <script type="module">
+      // =========================================================
+      // CONIGURAÇÃO FIREBASE
+      // =========================================================
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyC2ShTbZe6XwUq2woGy9la-mCn_BhC263c",
+  authDomain: "vetro-tavioo.firebaseapp.com",
+  databaseURL: "https://vetro-tavioo-default-rtdb.firebaseio.com",
+  projectId: "vetro-tavioo",
+  storageBucket: "vetro-tavioo.firebasestorage.app",
+  messagingSenderId: "675152105558",
+  appId: "1:675152105558:web:d1d295ee6491aeae23abf7"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const db = getDatabase(app);
+function salvarOline(caminho, dados){
+  try{
+    set(ref(dbOnline, caminho), dados);
+  } catch (e){
+    console.warn("Erro no Firebase:", e);
+  }
+};
+
+function adicionarOnline(caminho, dados){
+  try{
+    push(ref(dbOnline, caminho), dados);
+  } catch(e){
+    console.warn("Erro no Firebase:", e);
+  }
+};
+console.log("Sistema online ativo!");
+
+
 
       // =========================================================
       // 0) TELA / NAVEGAÇÃO (<!-- @COPYRIGHT CODE BY TAVIOO -->)
@@ -1768,6 +1808,7 @@
             updatedAt: Date.now(),
           };
           const req = store.put(registro);
+          salvarOline("ops/" + registro.key + "/cabeçalho",registro);
           req.onsuccess = () => resolve(registro);
           req.onerror = () => reject(new Error("Erro ao salvar OP"));
         });
@@ -1806,6 +1847,7 @@
             updatedAt: Date.now(),
           };
           const req = store.put(reg);
+          salvarOline("ops/" + reg.opKey + "/receita",reg.insumo, reg);
           req.onsuccess = () => resolve(reg);
           req.onerror = () => reject(new Error("Erro ao salvar receita"));
         });
@@ -1895,6 +1937,7 @@
             updatedAt: Date.now(),
           };
           const req = store.put(reg);
+          salvarOline("programacao/" + reg.key, reg);
           req.onsuccess = () => resolve(reg);
           req.onerror = () => reject(new Error("Erro ao salvar programação"));
         });
@@ -1961,6 +2004,7 @@
         return new Promise((resolve, reject) => {
           const store = tx("HIST_OP", "readwrite");
           const req = store.put(payload);
+          salvarOline("historico/" + payload.key, payload);
           req.onsuccess = () => resolve(payload);
           req.onerror = () =>
             reject(new Error("Erro ao salvar histórico da OP"));
@@ -2246,137 +2290,6 @@
       let sessao = null;
       let eventos = [];
 
-      // =========================================================
-//  LIVE SYNC (PC -> Tablet) via API do servidor
-//  - PC publica sessao/eventos
-//  - Tablet puxa e renderiza
-// =========================================================
-const LIVE_ENABLED = true;
-const LIVE_POLL_MS = 3000; // tablet atualiza a cada 3s
-
-function getRole() {
-  const urlRole = new URLSearchParams(location.search).get("role");
-  if (urlRole === "pc" || urlRole === "tablet") return urlRole;
-  
-  const saved = localStorage.getItem("vetro_role");
-  if(saved === "pc" || saved === "tablet") return saved;
-
-  const small = window.matchMedia("(max-width: 900px)").matches;
-  return small ? "tablet" : "pc";
-}
-function isTabletMode(){
-  return getRole() === "tablet";
-}
-
-function getMaquinaSelecionada() {
-  // se tiver sessão, usa ela; senão usa o select da tela abrir OP
-  return (sessao?.maquina || document.getElementById("maquinaInput")?.value || "FW1").toUpperCase();
-}
-
-function montarSnapshotLive() {
-  // tudo o que o tablet precisa pra mostrar igual ao PC
-  return {
-    sessao: sessao ? {
-      op: sessao.op,
-      itemOp: sessao.itemOp,
-      dataOp: sessao.dataOp,
-      maquina: sessao.maquina,
-      turno: sessao.turno,
-      produto: sessao.produto,
-      dn: sessao.dn,
-      metaTubos: sessao.metaTubos,
-      previstoPorTubo: sessao.previstoPorTubo,
-      inicio: sessao.inicio,
-    } : null,
-    eventos: eventos || [],
-    obsFinal: String(document.getElementById("obsFinal")?.value || ""),
-  };
-}
-
-async function publicarLive() {
-  if (!LIVE_ENABLED) return;
-  if (isTabletMode()) return;
-
-  const maq = getMaquinaSelecionada();
-  const payload = montarSnapshotLive();
-
-  try {
-    await fetch(`/api/live/${encodeURIComponent(maq)}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-  } catch (e) {
-    // não trava o sistema
-    console.warn("Falha ao publicar live:", e);
-  }
-}
-
-async function puxarLive() {
-  if (!LIVE_ENABLED) return;
-  if (!isTabletMode()) return; // PC não puxa
-
-  const maq = getMaquinaSelecionada();
-
-  try {
-    const r = await fetch(`/api/live/${encodeURIComponent(maq)}?ts=${Date.now()}`);
-    const j = await r.json();
-    if (!j?.ok) return;
-
-    if (!j.data || !j.data.sessao) {
-      // sem sessão ao vivo
-      return;
-    }
-
-    // aplica estado no tablet
-    sessao = j.data.sessao;
-    eventos = Array.isArray(j.data.eventos) ? j.data.eventos : [];
-
-    // garante Date nos timestamps
-    eventos.forEach((ev) => {
-      if (ev?.timestamp && !(ev.timestamp instanceof Date)) {
-        ev.timestamp = new Date(ev.timestamp);
-      }
-    });
-
-    // preenche obsFinal pra bater com PC
-    const obsEl = document.getElementById("obsFinal");
-    if (obsEl) obsEl.value = j.data.obsFinal || "";
-
-    // mostra cards/áreas
-    document.getElementById("opInfo").style.display = "block";
-    document.getElementById("receitaPrevistaCard").style.display = "block";
-    document.getElementById("apontamentoCard").style.display = "block";
-    document.getElementById("resumoCard").style.display = "block";
-    document.getElementById("graficoCard").style.display = "block";
-
-    // atualiza pílulas
-    document.getElementById("opPill").textContent = `OP ${sessao.op}`;
-    document.getElementById("itemOpPill").textContent = `Item OP: ${sessao.itemOp}`;
-    document.getElementById("dataOpPill").textContent = `Data: ${sessao.dataOp}`;
-    document.getElementById("produtoPill").textContent = sessao.produto || "(Sem produto)";
-    document.getElementById("dnPill").textContent = sessao.dn || "(Sem DN)";
-    document.getElementById("metaPill").textContent =
-      `Máquina ${sessao.maquina} | Turno ${sessao.turno} | Meta ${sessao.metaTubos} tubos`;
-
-    // atualiza select de ajuste
-    const sel = document.getElementById("ajusteItemSelect");
-    if (sel) {
-      sel.innerHTML = "";
-      Object.keys(sessao.previstoPorTubo || {}).forEach((item) => {
-        const opt = document.createElement("option");
-        opt.value = item;
-        opt.textContent = item;
-        sel.appendChild(opt);
-      });
-    }
-
-    renderTudo();
-  } catch (e) {
-    console.warn("Falha ao puxar live:", e);
-  }
-}
-
       function setAba(aba) {
         const padrao = document.getElementById("abaPadrao");
         const pesagem = document.getElementById("abaPesagem");
@@ -2478,7 +2391,6 @@ async function puxarLive() {
         setAba("padrao");
         renderTudo();
         atualizarPreviewPesagem();
-        await publicarLiver();
       }
 
       function parseNumberBR(raw) {
@@ -2573,7 +2485,6 @@ if (faltando.length) return alert("Informe o(s) lote(s): " + faltando.join(", ")
         document.getElementById("lote_padrao_areia").value = "";
 
         renderTudo();
-        publicarLiver();
       }
 
       // ===== Pesagem =====
@@ -2831,7 +2742,6 @@ if (faltando.length) return alert("Informe o(s) lote(s): " + faltando.join(", ")
 
         atualizarPreviewPesagem();
         renderTudo();
-        publicarLiver();
       }
 
       // ===== Ajuste Manual =====
@@ -2857,13 +2767,11 @@ if (faltando.length) return alert("Informe o(s) lote(s): " + faltando.join(", ")
         document.getElementById("ajusteKgInput").value = "";
         document.getElementById("ajusteObsInput").value = "";
         renderTudo();
-        publicarLiver();
       }
 
       function excluirEvento(idx) {
         eventos.splice(idx, 1);
         renderTudo();
-        publicarLiver();
       }
 
       function calcularRealPorItem() {
@@ -3689,7 +3597,6 @@ Object.entries(calc).forEach(([item, v]) => {
         // 4) limpa sessão
         resetarTudo();
       }
-        
 
       // =========================================================
       // 3) PCP (Cadastro/Receita/Lista + Programação)
@@ -4367,13 +4274,62 @@ Object.entries(calc).forEach(([item, v]) => {
           setDbStatus("ERRO (sem BD)");
           alert("Falha ao iniciar banco interno (IndexedDB).");
         }
-        if(isTabletMode()){
-          setInterval(puxarLive, LIVE_POLL_MS);
-          puxarLive();
-        }
       });
 
+      // ===============================
+// EXPOR FUNÇÕES PARA O HTML
+// ===============================
+
+// Navegação
+window.irPara = irPara;
+window.voltarMenu = voltarMenu;
+window.pcpAbrirBloco = pcpAbrirBloco;
+window.pcpFecharBlocos = pcpFecharBlocos;
+
+// Produção
+window.prodAbrir = prodAbrir;
+window.prodVoltarHub = prodVoltarHub;
+window.abrirOP = abrirOP;
+window.resetarTudo = resetarTudo;
+window.setAba = setAba;
+window.adicionarEventoPadrao = adicionarEventoPadrao;
+window.adicionarEventoPesagem = adicionarEventoPesagem;
+window.adicionarAjusteManual = adicionarAjusteManual;
+window.encerrarOP = encerrarOP;
+window.copiarResumo = copiarResumo;
+window.compartilharResumo = compartilharResumo;
+window.baixarCSV = baixarCSV;
+window.fecharDetalhes = fecharDetalhes;
+
+// Histórico Produção
+window.prodRecarregarEncerradas = prodRecarregarEncerradas;
+window.prodFiltrarEncerradas = prodFiltrarEncerradas;
+window.prodAbrirResumoHist = prodAbrirResumoHist;
+window.prodBaixarCsvHist = prodBaixarCsvHist;
+window.prodExcluirHist = prodExcluirHist;
+window.prodFecharHistResumo = prodFecharHistResumo;
+
+// PCP
+window.pcpSalvarOP = pcpSalvarOP;
+window.pcpCarregarParaReceita = pcpCarregarParaReceita;
+window.pcpLimparFormulario = pcpLimparFormulario;
+window.pcpAdicionarLinhaInsumo = pcpAdicionarLinhaInsumo;
+window.pcpSalvarReceita = pcpSalvarReceita;
+window.pcpCarregarReceitaExistente = pcpCarregarReceitaExistente;
+window.pcpRecarregarListaOPs = pcpRecarregarListaOPs;
+window.exportarBackupJSON = exportarBackupJSON;
+window.importarBackupJSON = importarBackupJSON;
+
+// Programação
+window.progAdicionar = progAdicionar;
+window.progRecarregar = progRecarregar;
+window.progLimparCampos = progLimparCampos;
+
+// Gráfico
+window.renderGraficoResumo = renderGraficoResumo;
 
     </script>
   </body>
 </html>
+
+<!-- @COPYRIGHT CODE BY TAVIOO -->
