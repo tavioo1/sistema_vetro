@@ -1614,8 +1614,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const db = getDatabase(app);
-function salvarOline(caminho, dados){
+const dbOnline = getDatabase(app);
+let db = null;
+function salvarOnline(caminho, dados){
   try{
     set(ref(dbOnline, caminho), dados);
   } catch (e){
@@ -1714,7 +1715,7 @@ console.log("Sistema online ativo!");
       // =========================================================
       const DB_NAME = "VetroDB";
       const DB_VERSION = 4;
-      let db = null;
+      let dbOn = null;
 
       function keyOP(op, itemOp, data) {
         const o = String(op || "").trim();
@@ -1808,7 +1809,7 @@ console.log("Sistema online ativo!");
             updatedAt: Date.now(),
           };
           const req = store.put(registro);
-          salvarOline("ops/" + registro.key + "/cabeçalho",registro);
+          salvarOnline ("ops/" + registro.key + "/cabecalho",registro);
           req.onsuccess = () => resolve(registro);
           req.onerror = () => reject(new Error("Erro ao salvar OP"));
         });
@@ -1847,7 +1848,7 @@ console.log("Sistema online ativo!");
             updatedAt: Date.now(),
           };
           const req = store.put(reg);
-          salvarOline("ops/" + reg.opKey + "/receita",reg.insumo, reg);
+          salvarOnline("ops/" + reg.opKey + "/receita",reg.insumo, reg);
           req.onsuccess = () => resolve(reg);
           req.onerror = () => reject(new Error("Erro ao salvar receita"));
         });
@@ -1937,7 +1938,7 @@ console.log("Sistema online ativo!");
             updatedAt: Date.now(),
           };
           const req = store.put(reg);
-          salvarOline("programacao/" + reg.key, reg);
+          salvarOnline("programacao/" + reg.key, reg);
           req.onsuccess = () => resolve(reg);
           req.onerror = () => reject(new Error("Erro ao salvar programação"));
         });
@@ -2004,7 +2005,7 @@ console.log("Sistema online ativo!");
         return new Promise((resolve, reject) => {
           const store = tx("HIST_OP", "readwrite");
           const req = store.put(payload);
-          salvarOline("historico/" + payload.key, payload);
+          salvarOnline("historico/" + payload.key, payload);
           req.onsuccess = () => resolve(payload);
           req.onerror = () =>
             reject(new Error("Erro ao salvar histórico da OP"));
@@ -4280,13 +4281,8 @@ Object.entries(calc).forEach(([item, v]) => {
 // EXPOR FUNÇÕES PARA O HTML
 // ===============================
 
-// Navegação
 window.irPara = irPara;
 window.voltarMenu = voltarMenu;
-window.pcpAbrirBloco = pcpAbrirBloco;
-window.pcpFecharBlocos = pcpFecharBlocos;
-
-// Produção
 window.prodAbrir = prodAbrir;
 window.prodVoltarHub = prodVoltarHub;
 window.abrirOP = abrirOP;
@@ -4301,7 +4297,6 @@ window.compartilharResumo = compartilharResumo;
 window.baixarCSV = baixarCSV;
 window.fecharDetalhes = fecharDetalhes;
 
-// Histórico Produção
 window.prodRecarregarEncerradas = prodRecarregarEncerradas;
 window.prodFiltrarEncerradas = prodFiltrarEncerradas;
 window.prodAbrirResumoHist = prodAbrirResumoHist;
@@ -4309,7 +4304,6 @@ window.prodBaixarCsvHist = prodBaixarCsvHist;
 window.prodExcluirHist = prodExcluirHist;
 window.prodFecharHistResumo = prodFecharHistResumo;
 
-// PCP
 window.pcpSalvarOP = pcpSalvarOP;
 window.pcpCarregarParaReceita = pcpCarregarParaReceita;
 window.pcpLimparFormulario = pcpLimparFormulario;
@@ -4320,13 +4314,12 @@ window.pcpRecarregarListaOPs = pcpRecarregarListaOPs;
 window.exportarBackupJSON = exportarBackupJSON;
 window.importarBackupJSON = importarBackupJSON;
 
-// Programação
 window.progAdicionar = progAdicionar;
 window.progRecarregar = progRecarregar;
 window.progLimparCampos = progLimparCampos;
 
-// Gráfico
 window.renderGraficoResumo = renderGraficoResumo;
+window.atualizarPreviewPesagem = atualizarPreviewPesagem;
 
     </script>
   </body>
